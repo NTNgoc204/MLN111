@@ -13,11 +13,11 @@ const Footer = () => {
       >
         <blockquote className="text-4xl font-serif italic text-zinc-900 mb-16 relative inline-block">
           <span className="absolute -top-12 -left-12 text-9xl text-soviet-red opacity-10">"</span>
-          Không có gì tồn tại một mình.
+          Tự do không phải thoát khỏi quy luật, mà là làm chủ quy luật.
           <span className="absolute -bottom-16 -right-12 text-9xl text-soviet-red opacity-10">"</span>
         </blockquote>
         
-        <div className="flex flex-col md:flex-row justify-between items-center gap-12 pt-16 border-t border-zinc-100">
+        {/* <div className="flex flex-col md:flex-row justify-between items-center gap-12 pt-16 border-t border-zinc-100">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-soviet-red rounded-full flex items-center justify-center shadow-lg shadow-soviet-red/20">
               <span className="text-white font-black text-xl">M</span>
@@ -48,7 +48,7 @@ const Footer = () => {
           <div className="px-6 py-2 bg-soviet-gold text-white font-black text-[10px] uppercase tracking-[0.3em] rounded-full shadow-md">
             Chủ nghĩa duy vật biện chứng
           </div>
-        </div>
+        </div> */}
       </motion.div>
     </footer>
   );

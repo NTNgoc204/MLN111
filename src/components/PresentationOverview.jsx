@@ -4,11 +4,10 @@ import { Users, ListOrdered, BookOpen, Cpu, MessageSquare, PenTool, Terminal, Bo
 
 const PresentationOverview = () => {
   const members = [
-    { name: "Lê Nguyễn Xuân Khôi", id: "SE183384" },
-    { name: "Thân Trần Quốc Huy", id: "SE183533" },
-    { name: "Lại Bảo Khánh", id: "SE183944" },
-    { name: "Võ Thanh Tòng", id: "SE182169" },
-    { name: "Trần Thanh Hoài", id: "SE184132" },
+    { name: "Nguyễn Thành Ngọc", id: "SE180279" },
+    { name: "Nguyễn Tiến Đạt", id: "SE181844" },
+    { name: "Trần Anh Tú", id: "SE183396" },
+    { name: "Nguyễn Nam Thịnh", id: "SE182156" },
   ];
 
   const outline = [
@@ -47,7 +46,7 @@ const PresentationOverview = () => {
             Tổng quan <span className="text-zinc-800">Thuyết trình</span>
           </h2>
           <p className="text-xl font-medium text-zinc-500 mb-8">
-            Giảng viên hướng dẫn: <span className="text-zinc-900 font-bold underline decoration-soviet-red underline-offset-4">Tô Hải Anh</span>
+            Giảng viên hướng dẫn: <span className="text-zinc-900 font-bold underline decoration-soviet-red underline-offset-4">Hoàng Thắng</span>
           </p>
           <div className="w-24 h-2 bg-soviet-red mx-auto mb-8" />
         </motion.div>

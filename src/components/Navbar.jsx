@@ -33,7 +33,7 @@ const Navbar = () => {
           to="/" 
           className={`font-black tracking-[0.3em] uppercase text-sm transition-all duration-500 ${scrolled ? 'text-soviet-red scale-110' : 'text-zinc-800'}`}
         >
-          Mạng Lưới <span className="text-soviet-orange">Sự Sống</span>
+          TỰ DO & <span className="text-soviet-orange">TẤT YẾU</span>
         </Link>
         
         <div className="hidden md:flex gap-10">

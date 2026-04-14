@@ -17,7 +17,7 @@ const HeroSection = () => {
             Triết học Mác - Lênin
           </div>
           <h1 className="text-5xl md:text-9xl font-bold tracking-tighter text-soviet-red mb-8 uppercase leading-none">
-            Mạng Lưới <br /> <span className="text-soviet-orange">Sự Sống</span>
+            TỰ DO & <br /> <span className="text-soviet-orange">TẤT YẾU</span>
           </h1>
           <div className="h-2 w-48 bg-soviet-gold mx-auto mb-12 shadow-sm rounded-full" />
         </motion.div>
