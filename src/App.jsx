@@ -24,11 +24,11 @@ const HomePage = () => (
     <div id="theory">
       <TheorySection />
     </div>
-    <div id="connections">
-      <TypesOfConnections />
-    </div>
     <div id="dialectics">
       <DialecticalCategories />
+    </div>
+    <div id="connections">
+      <TypesOfConnections />
     </div>
     <div id="cases">
       <PracticalConnections />

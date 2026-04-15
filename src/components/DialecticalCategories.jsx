@@ -4,89 +4,81 @@ import { X, Info, BookOpen, Lightbulb, ChevronLeft, ChevronRight } from 'lucide-
 
 const categories = [
   {
-    title: "Cái Riêng - Cái Chung",
-    desc: "Mối quan hệ giữa sự vật đơn lẻ và những thuộc tính phổ biến lặp lại.",
-    images: ["/image/Cái%20Riêng%20Cái%20Chung.jpg"],
-    definition: {
-       riêng: "Là phạm trù dùng để chỉ một sự vật, hiện tượng, một quá trình riêng lẻ nhất định.",
-       chung: "Là phạm trù dùng để chỉ những thuộc tính, những mặt giống nhau và được lặp lại trong các cái riêng khác nhau."
-    },
+    title: "Quan điểm duy vật siêu hình (Thuyết định mệnh)",
+    desc: "",
+    images: ["/image/Ảnh chụp màn hình 2026-04-15 155003.png"],
+    definition: [
+      "Mọi sự vật, hiện tượng, kể cả hành vi của con người, đều chịu sự chi phối tất yếu nghiêm ngặt của các quy luật tự nhiên (nguyên lý nhân quả cứng nhắc).",
+      "Con người tưởng mình tự do chỉ vì không biết đến những nguyên nhân đã quyết định hành vi của mình.",
+      "Con người tưởng mình tự do cũng giống như con chim sẻ tưởng mình tự do bay lượn, nhưng thực chất nó bị quy luật khí động học và bản năng chi phối hoàn toàn."
+    ],
     relationship: [
-      "Cái chung tồn tại trong cái riêng và biểu thị thông qua cái riêng.",
-      "Cái chung phản ánh cái sâu sắc, bản chất."
+      "Ưu điểm: Khẳng định tính khách quan của tất yếu. Phản đối quan điểm thần học, duy tâm về (ý chí tự do siêu nhiên).",
+      "Hạn chế: Phủ nhận hoàn toàn tự do của con người. Quy con người về một cỗ máy vô hồn, không có ý chí, trách nhiệm đạo đức. Dẫn đến thuyết định mệnh bi quan: dù có cố gắng thế nào cũng không thay đổi được số phận."
+      
     ],
     lessons: [
-      "Chỉ có thể tìm cái chung trong những sự vật, hiện tượng riêng lẻ, không được xuất phát từ ý muốn chủ quan.",
-      "Nếu không hiểu biết những nguyên lý chung, hoạt động thực tiễn sẽ rơi vào tình trạng mò mẫm, mù quáng."
+      "Paul Holbach (1723–1789)",
+      "Julien Offray de La Mettrie (1709–1751)",
+      "Pierre-Simon Laplace (1749–1827) – với khái niệm (con quỷ Laplace)"
     ]
   },
   {
-    title: "Bản Chất - Hiện Tượng",
-    desc: "Sự đối lập và thống nhất giữa cốt lõi bên trong và biểu hiện bên ngoài.",
-    images: ["/image/Bản%20Chất%20Hiện%20tượng.jpg"],
-    definition: {
-       bảnChất: "Tổng hợp tất cả những mặt, những mối liên hệ tất nhiên tương đối ổn định ở bên trong; quy định sự tồn tại và phát triển.",
-       hiệnTượng: "Sự biểu hiện ra bên ngoài của bản chất trong những điều kiện nhất định; phong phú và thường xuyên biến đổi."
-    },
+    title: "Quan điểm duy tâm khách quan (Hegel)",
+    desc: "",
+    images: ["/image/OIP.jfif"],
+    definition: [
+      "Tất yếu là sự vận động của Tinh thần tuyệt đối (ý niệm) trong lịch sử.",
+      "Tự do không phải là làm theo ý muốn chủ quan, mà là nhận thức và hành động theo tinh thần tất yếu của lịch sử.",
+      "Hegel nổi tiếng với câu nói: “Tự do là sự nhận thức được tất yếu.”",
+      "Tự do chỉ đạt được ở giai đoạn phát triển cao nhất của tinh thần (nhà nước pháp quyền, nghệ thuật, tôn giáo, triết học)."
+    ],
     relationship: [
-      "Cả hai đều tồn tại khách quan, vừa thống nhất vừa đối lập.",
-      "Thống nhất: Không có bản chất tách rời hiện tượng và ngược lại.",
-      "Đối lập: Bản chất thay đổi dẫn đến hiện tượng thay đổi; bản chất mất thì hiện tượng mất theo."
+      "Ưu điểm: Lần đầu tiên thống nhất được tự do và tất yếu trong một hệ thống biện chứng. Có công lao to lớn trong việc khắc phục quan điểm siêu hình, tách rời hai phạm trù. Ảnh hưởng mạnh mẽ đến triết học Mác sau này.",
+      "Hạn chế: Duy tâm, thần bí: coi tất yếu là sản phẩm của (Tinh thần tuyệt đối), không phải từ thế giới vật chất. Tự do cuối cùng chỉ là phục tùng tinh thần thế giới, mang màu sắc tôn giáo. Xem nhẹ vai trò của thực tiễn cách mạng, cải tạo thế giới."
+    ],
+    lessons: [
+      "Georg Wilhelm Friedrich Hegel (1770–1831)"
+      ]
+  },
+  {
+    title: "Quan điểm duy tâm chủ quan (Hiện sinh)",
+    desc: "",
+    images: ["/image/OIP (1).jfif"],
+    definition: [
+       "Con người bị kết án là phải tự do (Sartre).",
+       "Con người sinh ra không có bản chất định sẵn, tự do là tuyệt đối, không bị ràng buộc bởi bất kỳ tất yếu khách quan nào (kể cả Chúa, quy luật tự nhiên hay xã hội).",
+       "Tất yếu nếu có chỉ do chính con người tự đặt ra và có thể thay đổi bất cứ lúc nào",
+       "Hành vi của con người là hoàn toàn tự do, do đó phải chịu trách nhiệm tuyệt đối."
+    ],
+    relationship: [
+      "Ưu điểm: Đề cao tính chủ động, sáng tạo, trách nhiệm cá nhân. Chống lại thuyết định mệnh, chủ nghĩa duy vật tầm thường.",
+      "Hạn chế: Tuyệt đối hóa tự do, phủ nhận mọi tất yếu khách quan (quy luật tự nhiên, quy luật xã hội, di truyền, hoàn cảnh…). Rơi vào chủ nghĩa phi lý: không giải thích được vì sao con người không thể bay, không thể sống mà không cần ăn, không thể tùy tiện vi phạm pháp luật mà không bị trừng phạt. Dẫn đến khủng hoảng đạo đức: nếu mọi thứ đều do tôi tự do lựa chọn, thì tôi cũng có thể chọn cái ác mà không có cơ sở nào để phê phán."
+    ],
+    lessons: [
+      "Jean-Paul Sartre (1905–1980)",
+      "Albert Camus (1913–1960) (một phần)"
     ]
   },
   {
-    title: "Nội Dung - Hình Thức",
-    desc: "Mối quan hệ giữa các yếu tố cấu thành và phương thức tồn tại của sự vật.",
-    images: ["/image/Nội%20Dung.jpg", "/image/Hình%20thức.jpg"],
-    definition: {
-       nộiDung: "Phạm trù chỉ toàn bộ các mặt, các yếu tố, quá trình cấu thành nên sự vật, hiện tượng.",
-       hìnhThức: "Phạm trù chỉ phương thức tồn tại của sự vật; là hệ thống các mối liên hệ giữa các yếu tố."
-    },
+    title: "Quan điểm thần học (Kitô giáo, Hồi giáo, Phật giáo có yếu tố thần học)",
+    desc: "",
+    images: ["/image/OIP (2).jfif"],
+    definition: [
+       "Tất yếu là ý Chúa (thiên mệnh, định mệnh thiêng liêng).",
+       "Tự do là sự lựa chọn của con người trong khuôn khổ do Chúa cho phép.",
+        "Con người có ý chí tự do để quyết định hành vi của mình, nhưng kết quả cuối cùng vẫn do Chúa sắp đặt.",
+        "Mâu thuẫn giữa tiền định của Chúa và tự do của con người là một bí ẩn, phải chấp nhận bằng đức tin."
+    ],
     relationship: [
-      "Sự thống nhất: Bất cứ sự vật nào cũng có cả nội dung và hình thức gắn bó chặt chẽ.",
-      "Nội dung quyết định hình thức: Nội dung có khuynh hướng biến đổi, còn hình thức tương đối ổn định. Khi nội dung thay đổi, hình thức buộc phải đổi theo.",
-      "Hình thức tác động lại: Phù hợp thì thúc đẩy, không phù hợp thì kìm hãm sự phát triển."
-    ]
-  },
-  {
-    title: "Nguyên Nhân - Kết Quả",
-    desc: "Mối liên hệ nhân quả, tác động qua lại tạo nên sự biến đổi.",
-    images: ["/image/Nguyên%20NHân%20Kết%20Quả.jpg", "/image/Nguyên%20NHân%20Kết%20Quả2.jpg"],
-    definition: {
-       nguyênNhân: "Sự tác động lẫn nhau giữa các mặt hoặc các sự vật, gây ra một biến đổi nhất định.",
-       kếtQuả: "Những biến đổi xuất hiện do nguyên nhân gây ra."
-    },
-    relationship: [
-      "Nguyên nhân có trước và sinh ra kết quả.",
-      "Có nguyên nhân thì chắc chắn sẽ có kết quả và ngược lại.",
-      "Tính chuỗi: Kết quả này có thể là nguyên nhân của một kết quả khác."
-    ]
-  },
-  {
-    title: "Khả Năng - Hiện Thực",
-    desc: "Mối liên hệ giữa cái chưa xuất hiện và cái đang tồn tại thực tế.",
-    images: ["/image/Khả%20năng%20Hiện%20thực.jpg"],
-    definition: {
-       khảNăng: "Cái chưa xuất hiện trong thực tế, nhưng sẽ xuất hiện khi có điều kiện thích hợp.",
-       hiệnThực: "Những cái đang tồn tại trong thực tế và tư duy."
-    },
-    relationship: [
-      "Khả năng và hiện thực thống nhất: Khả năng chuyển hóa thành hiện thực và hiện thực chứa khả năng mới.",
-      "Điều kiện chuyển hóa: Cần có điều kiện khách quan và nhân tố chủ quan phù hợp."
-    ]
-  },
-  {
-    title: "Tất Nhiên - Ngẫu Nhiên",
-    desc: "Sự khác biệt giữa cái tất yếu phải xảy ra và cái có thể xảy ra hoặc không.",
-    images: ["/image/Ngẫu%20Nhiên%20Tất%20Nhiên.jpg"],
-    definition: {
-       tấtNhiên: "Do nguyên nhân bên trong quyết định; trong điều kiện nhất định phải xảy ra đúng như thế.",
-       ngẫuNhiên: "Do nguyên nhân bên ngoài quy định; có thể xuất hiện hoặc không, có thể thế này hoặc thế khác."
-    },
-    relationship: [
-      "Tất nhiên đóng vai trò quyết định, chi phối sự phát triển.",
-      "Ngẫu nhiên ảnh hưởng làm diễn trình nhanh hay chậm, tốt hay xấu.",
-      "Sự thống nhất: Cái tất nhiên vạch đường đi thông qua vô số cái ngẫu nhiên."
+      "Ưu điểm: Giải thích được nhu cầu tự do ý chí gắn với trách nhiệm đạo đức và tôn giáo. Có ảnh hưởng sâu rộng trong lịch sử văn minh phương Tây.",
+      "Hạn chế: Phi khoa học, duy tâm, thần bí. Không giải quyết được mâu thuẫn logic giữa tiền định của Chúa và tự do của con người (phải dùng đến mầu nhiệm). Không thể kiểm chứng bằng thực tiễn.",
+      "Các nhà thần học Hồi giáo thời trung cổ"
+    ],
+    lessons: [
+      "Thánh Augustine (354–430)",
+      "Thomas Aquinas (1225–1274)",
+      "Phật giáo: Có yếu tố thần học nhưng không hoàn toàn tương đồng với quan điểm thần học phương Tây."
     ]
   }
 ];
@@ -94,6 +86,13 @@ const categories = [
 const DialecticalCategories = () => {
   const [selected, setSelected] = useState(null);
   const [imgIdx, setImgIdx] = useState(0);
+
+  const getDefinitionItems = (definition) => {
+    if (!definition) return [];
+    if (Array.isArray(definition)) return definition;
+    if (typeof definition === 'object') return Object.values(definition);
+    return [definition];
+  };
 
   const handleOpen = (item) => {
     setSelected(item);
@@ -109,11 +108,11 @@ const DialecticalCategories = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-black text-soviet-red mb-6 uppercase tracking-tighter italic">
-            6 Cặp Phạm Trù Biện Chứng
+            CÁC QUAN ĐIỂM TRIẾT HỌC TRƯỚC MÁC VỀ TỰ DO VÀ TẤT YẾU
           </h2>
           <div className="h-2 w-24 bg-soviet-gold mx-auto mb-8 rounded-full" />
           <p className="text-lg text-zinc-500 max-w-3xl mx-auto font-medium">
-            Khám phá các quy luật vận động nội tại của thế giới thông qua các cặp phạm trù cơ bản của chủ nghĩa duy vật biện chứng.
+            Trước khi triết học Mác – Lênin xuất hiện, đã có nhiều trường phái triết học bàn về mối quan hệ giữa tự do và tất yếu. Nhìn chung, các quan điểm này đều chưa giải quyết triệt để mối quan hệ biện chứng giữa hai phạm trù, và thường rơi vào một trong hai khuynh hướng: tuyệt đối hóa tất yếu hoặc tuyệt đối hóa tự do
           </p>
         </motion.div>
 
@@ -218,11 +217,7 @@ const DialecticalCategories = () => {
               </div>
 
               <div className="lg:w-1/2 p-8 lg:p-12 overflow-y-auto max-h-[60vh] lg:max-h-[80vh] bg-white">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="bg-soviet-red/10 text-soviet-red px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
-                    Cặp phạm trù biện chứng
-                  </span>
-                </div>
+                
                 
                 <h3 className="text-3xl lg:text-4xl font-black text-zinc-900 mb-4 uppercase tracking-tighter italic">
                   {selected.title}
@@ -236,11 +231,8 @@ const DialecticalCategories = () => {
                       <BookOpen className="w-4 h-4" /> Định nghĩa
                     </h4>
                     <div className="grid gap-3">
-                      {Object.entries(selected.definition).map(([key, val], i) => (
+                      {getDefinitionItems(selected.definition).map((val, i) => (
                         <div key={i} className="bg-zinc-50 p-4 rounded-xl border-l-4 border-soviet-red">
-                          <span className="font-black text-zinc-900 uppercase text-[10px] block mb-1 opacity-70">
-                            {key.replace(/([A-Z])/g, ' $1')}
-                          </span>
                           <p className="text-zinc-600 text-xs leading-relaxed">{val}</p>
                         </div>
                       ))}
@@ -250,10 +242,10 @@ const DialecticalCategories = () => {
                   {/* Mối quan hệ */}
                   <div className="space-y-4">
                     <h4 className="flex items-center gap-2 text-soviet-red font-black uppercase text-xs tracking-widest">
-                      <Info className="w-4 h-4" /> Mối quan hệ & Ý nghĩa
+                      <Info className="w-4 h-4" /> Ưu điểm & Hạn chế
                     </h4>
                     <ul className="space-y-2">
-                      {selected.relationship.map((text, i) => (
+                      {(selected.relationship || []).map((text, i) => (
                         <li key={i} className="flex items-start gap-2 text-zinc-600 text-xs leading-relaxed">
                           <div className="mt-1.5 w-1 h-1 rounded-full bg-soviet-gold flex-shrink-0" />
                           {text}
@@ -266,7 +258,7 @@ const DialecticalCategories = () => {
                   {selected.lessons && (
                     <div className="space-y-4">
                       <h4 className="flex items-center gap-2 text-soviet-red font-black uppercase text-xs tracking-widest">
-                        <Lightbulb className="w-4 h-4" /> Bài học thực tiễn
+                        <Lightbulb className="w-4 h-4" /> Đại diện tiêu biểu:
                       </h4>
                       <div className="bg-soviet-red/5 p-5 rounded-xl border-2 border-soviet-red/10">
                         <ul className="space-y-2">

@@ -16,7 +16,7 @@ const HeroSection = () => {
           <div className="mb-4 inline-block bg-soviet-red text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-[0.4em] shadow-lg shadow-soviet-red/20">
             Triết học Mác - Lênin
           </div>
-          <h1 className="text-5xl md:text-9xl font-bold tracking-tighter text-soviet-red mb-8 uppercase leading-none">
+          <h1 className="text-5xl md:text-9xl font-bold tracking-tighter text-soviet-red mb-8  uppercase leading-none">
             TỰ DO & <br /> <span className="text-soviet-orange">TẤT YẾU</span>
           </h1>
           <div className="h-2 w-48 bg-soviet-gold mx-auto mb-12 shadow-sm rounded-full" />
@@ -28,9 +28,9 @@ const HeroSection = () => {
           transition={{ delay: 1, duration: 1.5 }}
           className="text-2xl md:text-4xl font-serif italic text-zinc-700 leading-tight max-w-4xl mx-auto"
         >
-          "Trong tự nhiên, không có gì tồn tại tách biệt. Mọi thứ đều là một mắt xích trong mạng lưới các mối quan hệ."
+          “Tự do là sự nhận thức được tất yếu."
           <footer className="mt-8 text-sm md:text-xl font-sans uppercase tracking-[0.3em] text-soviet-red font-black not-italic">
-            — Friedrich Engels
+            (Spinoza, Hegel, Engels)
           </footer>
         </motion.blockquote>
       </div>
@@ -42,7 +42,7 @@ const HeroSection = () => {
         className="absolute bottom-12 left-1/2 -translate-x-1/2"
       >
         <div className="flex flex-col items-center gap-4">
-          <span className="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-black">Khám phá vũ trụ liên kết</span>
+          <span className="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-black"></span>
           <div className="w-1 h-16 bg-gradient-to-b from-soviet-red via-soviet-gold to-transparent rounded-full" />
         </div>
       </motion.div>

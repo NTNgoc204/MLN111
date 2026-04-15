@@ -11,11 +11,10 @@ const PresentationOverview = () => {
   ];
 
   const outline = [
-    { title: "Nguyên lý về mối liên hệ phổ biến", desc: "Nền tảng lý luận về sự liên kết giữa các sự vật, hiện tượng." },
-    { title: "Các loại hình liên hệ phổ biến", desc: "Phân loại các mối liên hệ: bên trong - bên ngoài, cơ bản - không cơ bản." },
-    { title: "Các phạm trù biện chứng", desc: "Đi sâu vào cặp phạm trù Nguyên nhân - Kết quả và tính chuyển hóa." },
-    { title: "Liên hệ thực tiễn & Ý nghĩa", desc: "Vận dụng vào biến đổi khí hậu, hệ sinh thái và bài học phương pháp luận." },
-    { title: "Tương tác & Hệ thống hóa", desc: "Thử thách nhân quả và củng cố kiến thức qua bản đồ tư duy." },
+    { title: "Nguyên lý về mối liên hệ phổ biến", desc: "Nền tảng lý luận về sự liên kết giữa sự tự do và sự tất yếu." },
+    { title: "Quan điểm qua các trường phái về sự tự do và sự tất yếu", desc: "Duy tâm – duy vật – thần học nhìn tự do & tất yếu thế nào?" },
+    { title: "Quan điểm của Triết học Mác - Lênin", desc: "Phần quan trọng nhất – Tự do = nhận thức tất yếu" },
+    { title: "Liên hệ thực tiễn & Ý nghĩa", desc: "Hành động thế nào để vừa tự do vừa đúng quy luật?" },
   ];
 
   const tools = [
