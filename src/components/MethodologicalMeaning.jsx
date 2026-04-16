@@ -65,7 +65,6 @@ const MethodologicalMeaning = () => {
             Ý Nghĩa Phương Pháp Luận
           </h2>
           <p className="text-sm md:text-base text-zinc-600 max-w-3xl mx-auto font-medium">
-            Phần tóm tắt ngắn trên trang chính. Nhấn vào thẻ để mở cửa sổ nhỏ và đọc đầy đủ nội dung phương pháp luận.
           </p>
         </motion.div>
 
