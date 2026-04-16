@@ -155,6 +155,12 @@ const Card = ({ card, hidden }) => (
   </motion.div>
 );
 
+const MAX_PLAYER_HITS = 3;
+const MAX_HAND_CARDS = 5;
+const TARGET_PLAYER_WIN_RATE = 0.2;
+const DEALER_EDGE_ROUND_RATE = 1 - TARGET_PLAYER_WIN_RATE;
+const DEALER_WIN_CONVERT_RATE = 0.65;
+
 const CardGame = () => {
   const [deck, setDeck] = useState([]);
   const [playerHand, setPlayerHand] = useState([]);
@@ -163,12 +169,14 @@ const CardGame = () => {
   const [message, setMessage] = useState('Chào mừng đến với Xì Dách Biện Chứng!');
   const [playerScore, setPlayerScore] = useState(0);
   const [dealerScore, setDealerScore] = useState(0);
+  const [resultType, setResultType] = useState('neutral');
   
   const [showQuiz, setShowQuiz] = useState(false);
   const [currentQuiz, setCurrentQuiz] = useState(null);
   const [quizFeedback, setQuizFeedback] = useState(null);
   const [wrongAnswers, setWrongAnswers] = useState(0);
   const [showResultOverlay, setShowResultOverlay] = useState(false);
+  const [dealerAdvantageRound, setDealerAdvantageRound] = useState(false);
 
   const isXiBan = (hand) => hand.length === 2 && hand.every(c => c.value === 'A');
   const isXiDach = (hand) => hand.length === 2 && hand.some(c => c.value === 'A') && hand.some(c => ['10', 'J', 'Q', 'K'].includes(c.value));
@@ -184,7 +192,7 @@ const CardGame = () => {
       } else if (['J', 'Q', 'K'].includes(card.value)) {
         score += 10;
       } else {
-        score += parseInt(card.value);
+        score += parseInt(card.value, 10);
       }
     }
     while (score > 21 && aces > 0) {
@@ -204,11 +212,174 @@ const CardGame = () => {
     return newDeck.sort(() => Math.random() - 0.5);
   };
 
+  const isNguLinh = (hand) => hand.length === MAX_HAND_CARDS && calculateScore(hand) <= 21;
+
+  const setRoundResult = (winner, nextMessage) => {
+    setMessage(nextMessage);
+    if (winner === 'player') setResultType('win');
+    else if (winner === 'dealer') setResultType('lose');
+    else setResultType('push');
+  };
+
+  const pickPlayerCardIndex = (currentDeck, currentPlayerHand) => {
+    const topIndex = currentDeck.length - 1;
+    if (topIndex < 0) return -1;
+
+    if (!dealerAdvantageRound || Math.random() > 0.45) return topIndex;
+
+    const evaluations = currentDeck.map((card, idx) => ({
+      idx,
+      score: calculateScore([...currentPlayerHand, card]),
+    }));
+
+    const bustCards = evaluations.filter((item) => item.score > 21);
+    if (bustCards.length > 0 && Math.random() < 0.45) {
+      return bustCards[Math.floor(Math.random() * bustCards.length)].idx;
+    }
+
+    const riskySafe = evaluations
+      .filter((item) => item.score <= 21)
+      .sort((a, b) => b.score - a.score);
+
+    return riskySafe.length > 0 ? riskySafe[0].idx : topIndex;
+  };
+
+  const pickDealerCardIndex = (currentDeck, currentDealerHand, currentPlayerHand) => {
+    const topIndex = currentDeck.length - 1;
+    if (topIndex < 0) return -1;
+
+    const evaluations = currentDeck.map((card, idx) => {
+      const nextHand = [...currentDealerHand, card];
+      return {
+        idx,
+        nextHand,
+        score: calculateScore(nextHand),
+      };
+    });
+
+    const safeCards = evaluations.filter((item) => item.score <= 21);
+    if (safeCards.length === 0) return topIndex;
+
+    if (!dealerAdvantageRound || Math.random() > 0.7) {
+      const topSafe = safeCards.find((item) => item.idx === topIndex);
+      return topSafe ? topIndex : safeCards[0].idx;
+    }
+
+    const playerScoreNow = calculateScore(currentPlayerHand);
+    const playerNguLinh = isNguLinh(currentPlayerHand);
+
+    const nguLinhOptions = safeCards.filter((item) => item.nextHand.length === MAX_HAND_CARDS);
+    if (nguLinhOptions.length > 0) {
+      if (playerNguLinh) {
+        const winningNguLinh = nguLinhOptions
+          .filter((item) => item.score < playerScoreNow)
+          .sort((a, b) => b.score - a.score);
+        if (winningNguLinh.length > 0) return winningNguLinh[0].idx;
+      }
+      return nguLinhOptions.sort((a, b) => a.score - b.score)[0].idx;
+    }
+
+    if (playerScoreNow <= 21) {
+      const beatPlayer = safeCards
+        .filter((item) => item.score > playerScoreNow)
+        .sort((a, b) => a.score - b.score);
+      if (beatPlayer.length > 0) return beatPlayer[0].idx;
+    }
+
+    return safeCards.sort((a, b) => b.score - a.score)[0].idx;
+  };
+
+  const decideRoundResult = (pHand, dHand, applyHouseEdge = false) => {
+    const pScore = calculateScore(pHand);
+    const dScore = calculateScore(dHand);
+
+    const playerXB = isXiBan(pHand);
+    const dealerXB = isXiBan(dHand);
+    const playerXD = isXiDach(pHand);
+    const dealerXD = isXiDach(dHand);
+    const playerNguLinh = isNguLinh(pHand);
+    const dealerNguLinh = isNguLinh(dHand);
+
+    let winner = 'push';
+    let resultMessage = 'HÃ²a bÃ i (Push)!';
+    let rankType = 'normal';
+
+    if (playerXB && !dealerXB) {
+      winner = 'player';
+      rankType = 'xiBan';
+      resultMessage = "XÃŒ BÃ€N! Báº¡n tháº¯ng tuyá»‡t Ä‘á»‘i!";
+    } else if (dealerXB && !playerXB) {
+      winner = 'dealer';
+      rankType = 'xiBan';
+      resultMessage = "NHÃ€ CÃI XÃŒ BÃ€N! Báº¡n Ä‘Ã£ thua.";
+    } else if (playerXD && !dealerXD && !dealerXB) {
+      winner = 'player';
+      rankType = 'xiDach';
+      resultMessage = "XÃŒ DÃCH! Báº¡n tháº¯ng ngay láº­p tá»©c!";
+    } else if (dealerXD && !playerXD && !playerXB) {
+      winner = 'dealer';
+      rankType = 'xiDach';
+      resultMessage = "NHÃ€ CÃI XÃŒ DÃCH! Báº¡n Ä‘Ã£ thua.";
+    } else if (playerNguLinh && dealerNguLinh) {
+      rankType = 'nguLinh';
+      if (pScore < dScore) {
+        winner = 'player';
+        resultMessage = "CÃ¹ng NGÅ¨ LINH! Báº¡n tháº¯ng vÃ¬ Ä‘iá»ƒm tháº¥p hÆ¡n.";
+      } else if (pScore > dScore) {
+        winner = 'dealer';
+        resultMessage = "CÃ¹ng NGÅ¨ LINH! NhÃ  cÃ¡i tháº¯ng vÃ¬ Ä‘iá»ƒm tháº¥p hÆ¡n.";
+      } else {
+        winner = 'push';
+        resultMessage = "CÃ¹ng NGÅ¨ LINH vÃ  cÃ¹ng Ä‘iá»ƒm! HÃ²a bÃ i.";
+      }
+    } else if (playerNguLinh && !dealerNguLinh) {
+      winner = 'player';
+      rankType = 'nguLinh';
+      resultMessage = "NGÅ¨ LINH! Báº¡n tháº¯ng.";
+    } else if (dealerNguLinh && !playerNguLinh) {
+      winner = 'dealer';
+      rankType = 'nguLinh';
+      resultMessage = "NHÃ€ CÃI NGÅ¨ LINH! Báº¡n Ä‘Ã£ thua.";
+    } else if (pScore > 21 && dScore > 21) {
+      winner = 'push';
+      resultMessage = 'Cáº£ hai cÃ¹ng quáº¯c! HÃ²a bÃ i.';
+    } else if (pScore > 21) {
+      winner = 'dealer';
+      resultMessage = 'QuÃ¡ 21 Ä‘iá»ƒm! Báº¡n Ä‘Ã£ thua.';
+    } else if (dScore > 21) {
+      winner = 'player';
+      resultMessage = 'NHÃ€ CÃI QUáº®C! Báº¡n Ä‘Ã£ tháº¯ng!';
+    } else if (pScore > dScore) {
+      winner = 'player';
+      resultMessage = 'CHÃšC Má»ªNG! Báº¡n tháº¯ng vá»›i Ä‘iá»ƒm sá»‘ cao hÆ¡n!';
+    } else if (pScore < dScore) {
+      winner = 'dealer';
+      resultMessage = 'NHÃ€ CÃI THáº®NG! Báº¡n Ä‘Ã£ thua rá»“i.';
+    }
+
+    if (
+      applyHouseEdge &&
+      dealerAdvantageRound &&
+      winner === 'player' &&
+      rankType === 'normal' &&
+      Math.random() < DEALER_WIN_CONVERT_RATE
+    ) {
+      winner = 'dealer';
+      resultMessage = 'NHÃ€ CÃI THáº®NG! Báº¡n Ä‘Ã£ thua rá»“i.';
+    }
+
+    return {
+      winner,
+      message: resultMessage,
+      playerScore: pScore,
+      dealerScore: dScore,
+    };
+  };
+
   const startGame = () => {
     const newDeck = createDeck();
     const pHand = [newDeck.pop(), newDeck.pop()];
     const dHand = [newDeck.pop(), newDeck.pop()];
-    
     setDeck(newDeck);
     setPlayerHand(pHand);
     setDealerHand(dHand);
@@ -216,36 +387,35 @@ const CardGame = () => {
     setDealerScore(calculateScore(dHand));
     setWrongAnswers(0);
     setShowResultOverlay(false);
-
-    // Check Special Hands Immediately
-    const playerXB = isXiBan(pHand);
-    const playerXD = isXiDach(pHand);
-    const dealerXB = isXiBan(dHand);
-    const dealerXD = isXiDach(dHand);
-
-    if (playerXB || playerXD || dealerXB || dealerXD) {
+    setShowQuiz(false);
+    setCurrentQuiz(null);
+    setResultType('neutral');
+    setDealerAdvantageRound(Math.random() < DEALER_EDGE_ROUND_RATE);
+    const hasOpeningSpecial =
+      isXiBan(pHand) || isXiDach(pHand) || isXiBan(dHand) || isXiDach(dHand);
+    if (hasOpeningSpecial) {
+      const openingResult = decideRoundResult(pHand, dHand, false);
       setGameState('finished');
       setShowResultOverlay(true);
-      if (playerXB && !dealerXB) setMessage("XÌ BÀN! Bạn thắng tuyệt đối!");
-      else if (dealerXB && !playerXB) setMessage("NHÀ CÁI XÌ BÀN! Bạn đã thua.");
-      else if (playerXD && !dealerXD && !dealerXB) setMessage("XÌ DÁCH! Bạn thắng ngay lập tức!");
-      else if (dealerXD && !playerXD && !playerXB) setMessage("NHÀ CÁI XÌ DÁCH! Bạn đã thua.");
-      else setMessage("Cả hai cùng có bộ bài đặc biệt! Hòa bài (Push)!");
+      setRoundResult(openingResult.winner, openingResult.message);
     } else {
       setGameState('playing');
-      setMessage('Muốn rút bài? Hãy trả lời đúng câu hỏi biện chứng!');
+      setMessage('Muon rut bai? Hay tra loi dung cau hoi bien chung!');
     }
     setQuizFeedback(null);
   };
-
   const requestHit = () => {
     if (gameState !== 'playing') return;
+    const drawCount = Math.max(0, playerHand.length - 2);
+    if (drawCount >= MAX_PLAYER_HITS || playerHand.length >= MAX_HAND_CARDS) {
+      setMessage('Ban da rut toi da 3 la (tong 5 la). Hay dung.');
+      return;
+    }
     const randomQuiz = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
     setCurrentQuiz(randomQuiz);
     setQuizFeedback(null);
     setShowQuiz(true);
   };
-
   const handleQuizAnswer = (index) => {
     if (index === currentQuiz.correct) {
       setQuizFeedback('correct');
@@ -263,85 +433,107 @@ const CardGame = () => {
       if (wrongAnswers >= 3) {
         setGameState('finished');
         setShowResultOverlay(true);
-        setMessage("BẠN ĐÃ THUA! Sai 3 câu hỏi, bạn không đủ trình độ để tiếp tục cuộc chơi!");
+        setRoundResult('dealer', 'BAN DA THUA! Sai 3 cau hoi, ban khong du trinh do de tiep tuc cuoc choi!');
       } else {
-        setMessage(`Sai rồi! Bạn không được rút bài lượt này. (Sai ${wrongAnswers}/3 câu)`);
+        setMessage(`Sai roi! Ban khong duoc rut bai luot nay. (Sai ${wrongAnswers}/3 cau)`);
       }
     }
     setShowQuiz(false);
     setQuizFeedback(null);
   };
-
   const executeHit = () => {
+    const drawCount = Math.max(0, playerHand.length - 2);
+    if (drawCount >= MAX_PLAYER_HITS || playerHand.length >= MAX_HAND_CARDS) {
+      setMessage('Ban da rut toi da 3 la (tong 5 la). Hay dung.');
+      return;
+    }
     const newDeck = [...deck];
-    if (newDeck.length === 0) return;
-    const newCard = newDeck.pop();
+    if (newDeck.length === 0) {
+      setGameState('dealerTurn');
+      return;
+    }
+    const cardIndex = pickPlayerCardIndex(newDeck, playerHand);
+    if (cardIndex < 0) return;
+    const newCard = newDeck.splice(cardIndex, 1)[0];
     const newHand = [...playerHand, newCard];
+    const score = calculateScore(newHand);
     setDeck(newDeck);
     setPlayerHand(newHand);
-    const score = calculateScore(newHand);
     setPlayerScore(score);
-
     if (score > 21) {
       setGameState('finished');
       setShowResultOverlay(true);
-      setMessage('Quá 21 điểm! Bạn đã thua.');
-    } else {
-      setMessage("Trả lời đúng! Bạn đã nhận được một lá bài.");
+      setRoundResult('dealer', 'Qua 21 diem! Ban da thua.');
+      return;
     }
+    if (isNguLinh(newHand)) {
+      setGameState('dealerTurn');
+      setMessage('Ban da NGU LINH! Cho nha cai lat bai...');
+      return;
+    }
+    if (drawCount + 1 >= MAX_PLAYER_HITS) {
+      setMessage('Ban da rut du 3 la. Hay dung.');
+      return;
+    }
+    setMessage('Tra loi dung! Ban da nhan duoc mot la bai.');
   };
-
   const stand = () => {
     if (gameState !== 'playing') return;
     setGameState('dealerTurn');
-    setMessage('Lượt của Nhà cái...');
+    setMessage('Luot cua Nha cai...');
   };
-
   useEffect(() => {
     if (gameState === 'dealerTurn') {
       const timer = setTimeout(() => {
         const dScore = calculateScore(dealerHand);
         const pScore = calculateScore(playerHand);
-        
-        // Logic Nhà cái thông minh & may mắn hơn:
-        // 1. Rút nếu dưới 17 (bắt buộc)
-        // 2. Rút nếu vẫn thua điểm người chơi và người chơi chưa quắc (đến ngưỡng 19 điểm)
-        const shouldHit = dScore < 17 || (dScore < pScore && pScore <= 21 && dScore < 19);
-
+        const playerNguLinh = isNguLinh(playerHand);
+        const dealerNguLinh = isNguLinh(dealerHand);
+        const dealerCanHit = dealerHand.length < MAX_HAND_CARDS;
+        const shouldHit =
+          dealerCanHit &&
+          !dealerNguLinh &&
+          (
+            dScore < 17 ||
+            (playerNguLinh && !dealerNguLinh) ||
+            (dScore < pScore && pScore <= 21 && dScore < 20) ||
+            (dealerAdvantageRound && pScore <= 21 && dScore <= pScore && dScore < 21)
+          );
         if (shouldHit) {
-          let newDeck = [...deck];
-          if (newDeck.length === 0) return;
-          
-          let nextCard = newDeck[newDeck.length - 1];
-          
-          // "Vận may biện chứng": Nếu rút quân tiếp theo bị quắc, có 40% cơ hội tráo con khác an toàn hơn
-          if (calculateScore([...dealerHand, nextCard]) > 21 && Math.random() < 0.4) {
-            const safeCardIdx = newDeck.findIndex(c => calculateScore([...dealerHand, c]) <= 21);
-            if (safeCardIdx !== -1) {
-              // Tráo quân bài an toàn lên đầu để rút
-              const safeCard = newDeck.splice(safeCardIdx, 1)[0];
-              newDeck.push(safeCard);
-              nextCard = safeCard;
-            }
+          const newDeck = [...deck];
+          if (newDeck.length === 0) {
+            const result = decideRoundResult(playerHand, dealerHand, true);
+            setPlayerScore(result.playerScore);
+            setDealerScore(result.dealerScore);
+            setGameState('finished');
+            setShowResultOverlay(true);
+            setRoundResult(result.winner, result.message);
+            return;
           }
-
-          const newCard = newDeck.pop();
+          const cardIndex = pickDealerCardIndex(newDeck, dealerHand, playerHand);
+          if (cardIndex < 0) return;
+          const newCard = newDeck.splice(cardIndex, 1)[0];
           const nextDealerHand = [...dealerHand, newCard];
           setDeck(newDeck);
           setDealerHand(nextDealerHand);
           setDealerScore(calculateScore(nextDealerHand));
         } else {
+          const result = decideRoundResult(playerHand, dealerHand, true);
+          setPlayerScore(result.playerScore);
+          setDealerScore(result.dealerScore);
           setGameState('finished');
           setShowResultOverlay(true);
-          if (dScore > 21) setMessage('NHÀ CÁI QUẮC! Bạn đã thắng!');
-          else if (pScore > dScore) setMessage('CHÚC MỪNG! Bạn thắng với điểm số cao hơn!');
-          else if (pScore < dScore) setMessage('NHÀ CÁI THẮNG! Bạn đã thua rồi.');
-          else setMessage('Hòa bài (Push)!');
+          setRoundResult(result.winner, result.message);
         }
       }, 1000);
       return () => clearTimeout(timer);
     }
-  }, [gameState, dealerHand, deck, playerHand]);
+  }, [gameState, dealerHand, deck, playerHand, dealerAdvantageRound]);
+  const playerDrawCount = Math.max(0, playerHand.length - 2);
+  const remainingHits = Math.max(0, MAX_PLAYER_HITS - playerDrawCount);
+  const canHit = gameState === 'playing' && remainingHits > 0 && playerHand.length < MAX_HAND_CARDS;
+  const isWinResult = resultType === 'win';
+  const isPushResult = resultType === 'push';
 
   return (
     <section className="min-h-screen bg-zinc-900 pt-32 pb-20 px-6 flex flex-col items-center overflow-x-hidden relative">
@@ -359,17 +551,17 @@ const CardGame = () => {
               animate={{ scale: 1, y: 0, rotate: 0 }}
               exit={{ scale: 0.5, y: 100, opacity: 0 }}
               className={`relative max-w-sm w-full p-8 rounded-[3rem] border-4 shadow-[0_0_50px_rgba(0,0,0,0.5)] text-center ${
-                message.includes('Bạn thắng') || message.includes('XÌ BÀN') || message.includes('XÌ DÁCH') || message.includes('Bạn đã thắng')
+                isWinResult
                   ? 'bg-soviet-gold border-white text-zinc-900' 
-                  : message.includes('Hòa')
+                  : isPushResult
                   ? 'bg-zinc-600 border-zinc-400 text-white'
                   : 'bg-soviet-red border-white text-white'
               }`}
             >
               <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 bg-inherit border-4 border-white rounded-full flex items-center justify-center shadow-xl">
-                {message.includes('Bạn thắng') || message.includes('XÌ BÀN') || message.includes('XÌ DÁCH') || message.includes('Bạn đã thắng') ? (
+                {isWinResult ? (
                   <Trophy className="w-12 h-12" />
-                ) : message.includes('Hòa') ? (
+                ) : isPushResult ? (
                   <RefreshCcw className="w-12 h-12" />
                 ) : (
                   <XCircle className="w-12 h-12" />
@@ -377,9 +569,9 @@ const CardGame = () => {
               </div>
               
               <h3 className="mt-8 text-3xl font-black uppercase italic tracking-tighter leading-tight mb-4">
-                {message.includes('Bạn thắng') || message.includes('XÌ BÀN') || message.includes('XÌ DÁCH') || message.includes('Bạn đã thắng')
+                {isWinResult
                   ? 'CHIẾN THẮNG!' 
-                  : message.includes('Hòa')
+                  : isPushResult
                   ? 'KẾT QUẢ HÒA'
                   : 'THẤT BẠI!'}
               </h3>
@@ -394,7 +586,7 @@ const CardGame = () => {
                   startGame();
                 }}
                 className={`w-full py-4 rounded-2xl font-black uppercase tracking-widest shadow-lg transition-all hover:scale-105 active:scale-95 ${
-                  message.includes('Bạn thắng') || message.includes('XÌ BÀN') || message.includes('XÌ DÁCH') || message.includes('Bạn đã thắng')
+                  isWinResult
                     ? 'bg-zinc-900 text-white'
                     : 'bg-white text-zinc-900'
                 }`}
@@ -448,11 +640,16 @@ const CardGame = () => {
             <div className="flex justify-between items-center text-white px-4">
               <div className="flex flex-col">
                 <span className="font-black uppercase tracking-widest text-xs opacity-50 flex items-center gap-2">
-                  <Hand className="w-4 h-4" /> Bạn
+                  <Hand className="w-4 h-4" /> Ban
                 </span>
                 {wrongAnswers > 0 && (
                   <span className="text-[10px] text-red-500 font-bold uppercase tracking-tighter mt-1">
-                    Lỗi: {wrongAnswers}/3
+                    Loi: {wrongAnswers}/3
+                  </span>
+                )}
+                {gameState === 'playing' && (
+                  <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-tighter mt-1">
+                    Rut con: {remainingHits}/3
                   </span>
                 )}
               </div>
@@ -481,9 +678,16 @@ const CardGame = () => {
             <>
               <button
                 onClick={requestHit}
-                className="px-10 py-4 bg-white text-zinc-900 font-black uppercase tracking-widest rounded-full hover:bg-zinc-100 transition-all shadow-xl flex items-center gap-3"
+                disabled={!canHit}
+                className={
+                  'px-10 py-4 font-black uppercase tracking-widest rounded-full transition-all shadow-xl flex items-center gap-3 ' +
+                  (canHit
+                    ? 'bg-white text-zinc-900 hover:bg-zinc-100'
+                    : 'bg-zinc-600 text-zinc-300 cursor-not-allowed')
+                }
               >
-                <HelpCircle className="w-5 h-5 text-soviet-red" /> Rút bài (Trả lời Quiz)
+                <HelpCircle className={'w-5 h-5 ' + (canHit ? 'text-soviet-red' : 'text-zinc-400')} />
+                {canHit ? 'Rut bai (Quiz) - con ' + remainingHits + '/3' : 'Da rut toi da 3 la'}
               </button>
               <button
                 onClick={stand}
@@ -500,14 +704,14 @@ const CardGame = () => {
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 className={`text-xl md:text-3xl font-black uppercase tracking-tighter p-6 rounded-3xl border-2 text-center ${
-                  message.includes('Bạn thắng') || message.includes('XÌ BÀN') || message.includes('XÌ DÁCH') || message.includes('Bạn đã thắng') 
+                  isWinResult 
                     ? 'bg-soviet-gold/10 text-soviet-gold border-soviet-gold/20' 
-                    : message.includes('Hòa') 
+                    : isPushResult 
                     ? 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20' 
                     : 'bg-red-500/10 text-red-500 border-red-500/20'
                 }`}
               >
-                {message.includes('Bạn thắng') || message.includes('XÌ BÀN') || message.includes('XÌ DÁCH') || message.includes('Bạn đã thắng') 
+                {isWinResult 
                   ? <Trophy className="inline w-8 h-8 mr-3 mb-1" /> 
                   : <TriangleAlert className="inline w-8 h-8 mr-3 mb-1" />}
                 {message}
