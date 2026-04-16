@@ -25,18 +25,12 @@ const MindmapPage = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="bg-white rounded-lg shadow-2xl p-8 border-4 border-soviet-red overflow-hidden"
         >
-          <iframe
-            src="https://gitmind.com/app/docs/m08fle2h"
-            title="Sơ đồ Tư duy - Mối liên hệ phổ biến"
-            style={{
-              width: "100%",
-              height: "700px",
-              border: "none",
-              borderRadius: "8px",
-            }}
-            allowFullScreen
+          <img
+            src="/image/Phạm trù Tự do và Tất yếu trong Triết học Mác - Lênin.jpg"
+            alt="Phạm trù Tự do và Tất yếu trong Triết học Mác - Lênin"
+            className="w-full h-auto rounded-lg"
             loading="lazy"
-          ></iframe>
+          />
         </motion.div>
 
         <motion.div
