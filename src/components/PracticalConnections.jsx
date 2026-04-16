@@ -141,7 +141,6 @@ const PracticalConnections = () => {
             Ứng Dụng Thực Tiễn (Case Study)
           </h2>
           <p className="text-sm md:text-base text-zinc-600 max-w-3xl mx-auto font-medium">
-            Bản xem nhanh trên trang chính. Nhấn từng thẻ để mở cửa sổ nhỏ với phần phân tích đầy đủ dựa theo nội dung docx.
           </p>
         </motion.div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
