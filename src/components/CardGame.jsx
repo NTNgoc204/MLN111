@@ -47,7 +47,7 @@ const QUESTIONS = [
     q: "Tự do là kết quả của điều gì?",
     options: ["Ý chí", "Nhận thức tất yếu", "May mắn", "Cảm xúc"],
     correct: 1,
-    desc: "Hiểu quy luật → hành động đúng → tự do."
+    desc: "Hiểu quy luật -> hành động đúng -> tự do."
   },
   {
     q: "Quan hệ giữa tự do và tất yếu là gì?",
@@ -107,7 +107,7 @@ const QUESTIONS = [
     q: "Tự do tăng khi nào?",
     options: ["Không hành động", "Hiểu rõ quy luật", "Ít hiểu biết", "Phụ thuộc"],
     correct: 1,
-    desc: "Hiểu biết càng cao → tự do càng lớn."
+    desc: "Hiểu biết càng cao -> tự do càng lớn."
   },
   {
     q: "Tất yếu tồn tại ở đâu?",
@@ -123,7 +123,7 @@ const QUESTIONS = [
   },
   {
     q: "Con đường đến tự do là gì?",
-    options: ["Nhận thức → thực tiễn", "Ý chí → may mắn", "Cảm xúc → hành động", "Bỏ qua thực tiễn"],
+    options: ["Nhận thức -> thực tiễn", "Ý chí -> may mắn", "Cảm xúc -> hành động", "Bỏ qua thực tiễn"],
     correct: 0,
     desc: "Nhận thức + thực tiễn."
   },
@@ -292,71 +292,67 @@ const CardGame = () => {
   const decideRoundResult = (pHand, dHand, applyHouseEdge = false) => {
     const pScore = calculateScore(pHand);
     const dScore = calculateScore(dHand);
-
     const playerXB = isXiBan(pHand);
     const dealerXB = isXiBan(dHand);
     const playerXD = isXiDach(pHand);
     const dealerXD = isXiDach(dHand);
     const playerNguLinh = isNguLinh(pHand);
     const dealerNguLinh = isNguLinh(dHand);
-
     let winner = 'push';
-    let resultMessage = 'HÃ²a bÃ i (Push)!';
+    let resultMessage = 'Hòa bài (Push)!';
     let rankType = 'normal';
-
     if (playerXB && !dealerXB) {
       winner = 'player';
       rankType = 'xiBan';
-      resultMessage = "XÃŒ BÃ€N! Báº¡n tháº¯ng tuyá»‡t Ä‘á»‘i!";
+      resultMessage = 'XÌ BÀN! Bạn thắng tuyệt đối!';
     } else if (dealerXB && !playerXB) {
       winner = 'dealer';
       rankType = 'xiBan';
-      resultMessage = "NHÃ€ CÃI XÃŒ BÃ€N! Báº¡n Ä‘Ã£ thua.";
+      resultMessage = 'NHÀ CÁI XÌ BÀN! Bạn đã thua.';
     } else if (playerXD && !dealerXD && !dealerXB) {
       winner = 'player';
       rankType = 'xiDach';
-      resultMessage = "XÃŒ DÃCH! Báº¡n tháº¯ng ngay láº­p tá»©c!";
+      resultMessage = 'XÌ DÁCH! Bạn thắng ngay lập tức!';
     } else if (dealerXD && !playerXD && !playerXB) {
       winner = 'dealer';
       rankType = 'xiDach';
-      resultMessage = "NHÃ€ CÃI XÃŒ DÃCH! Báº¡n Ä‘Ã£ thua.";
+      resultMessage = 'NHÀ CÁI XÌ DÁCH! Bạn đã thua.';
     } else if (playerNguLinh && dealerNguLinh) {
       rankType = 'nguLinh';
       if (pScore < dScore) {
         winner = 'player';
-        resultMessage = "CÃ¹ng NGÅ¨ LINH! Báº¡n tháº¯ng vÃ¬ Ä‘iá»ƒm tháº¥p hÆ¡n.";
+        resultMessage = 'Cùng NGŨ LINH! Bạn thắng vì điểm thấp hơn.';
       } else if (pScore > dScore) {
         winner = 'dealer';
-        resultMessage = "CÃ¹ng NGÅ¨ LINH! NhÃ  cÃ¡i tháº¯ng vÃ¬ Ä‘iá»ƒm tháº¥p hÆ¡n.";
+        resultMessage = 'Cùng NGŨ LINH! Nhà cái thắng vì điểm thấp hơn.';
       } else {
         winner = 'push';
-        resultMessage = "CÃ¹ng NGÅ¨ LINH vÃ  cÃ¹ng Ä‘iá»ƒm! HÃ²a bÃ i.";
+        resultMessage = 'Cùng NGŨ LINH và cùng điểm! Hòa bài.';
       }
     } else if (playerNguLinh && !dealerNguLinh) {
       winner = 'player';
       rankType = 'nguLinh';
-      resultMessage = "NGÅ¨ LINH! Báº¡n tháº¯ng.";
+      resultMessage = 'NGŨ LINH! Bạn thắng.';
     } else if (dealerNguLinh && !playerNguLinh) {
       winner = 'dealer';
       rankType = 'nguLinh';
-      resultMessage = "NHÃ€ CÃI NGÅ¨ LINH! Báº¡n Ä‘Ã£ thua.";
+      resultMessage = 'NHÀ CÁI NGŨ LINH! Bạn đã thua.';
     } else if (pScore > 21 && dScore > 21) {
       winner = 'push';
-      resultMessage = 'Cáº£ hai cÃ¹ng quáº¯c! HÃ²a bÃ i.';
+      resultMessage = 'Cả hai cùng quắc! Hòa bài.';
     } else if (pScore > 21) {
       winner = 'dealer';
-      resultMessage = 'QuÃ¡ 21 Ä‘iá»ƒm! Báº¡n Ä‘Ã£ thua.';
+      resultMessage = 'Quá 21 điểm! Bạn đã thua.';
     } else if (dScore > 21) {
       winner = 'player';
-      resultMessage = 'NHÃ€ CÃI QUáº®C! Báº¡n Ä‘Ã£ tháº¯ng!';
+      resultMessage = 'NHÀ CÁI QUẮC! Bạn đã thắng!';
     } else if (pScore > dScore) {
       winner = 'player';
-      resultMessage = 'CHÃšC Má»ªNG! Báº¡n tháº¯ng vá»›i Ä‘iá»ƒm sá»‘ cao hÆ¡n!';
+      resultMessage = 'CHÚC MỪNG! Bạn thắng với điểm số cao hơn!';
     } else if (pScore < dScore) {
       winner = 'dealer';
-      resultMessage = 'NHÃ€ CÃI THáº®NG! Báº¡n Ä‘Ã£ thua rá»“i.';
+      resultMessage = 'NHÀ CÁI THẮNG! Bạn đã thua rồi.';
     }
-
     if (
       applyHouseEdge &&
       dealerAdvantageRound &&
@@ -365,9 +361,8 @@ const CardGame = () => {
       Math.random() < DEALER_WIN_CONVERT_RATE
     ) {
       winner = 'dealer';
-      resultMessage = 'NHÃ€ CÃI THáº®NG! Báº¡n Ä‘Ã£ thua rá»“i.';
+      resultMessage = 'NHÀ CÁI THẮNG! Bạn đã thua rồi.';
     }
-
     return {
       winner,
       message: resultMessage,
@@ -400,7 +395,7 @@ const CardGame = () => {
       setRoundResult(openingResult.winner, openingResult.message);
     } else {
       setGameState('playing');
-      setMessage('Muon rut bai? Hay tra loi dung cau hoi bien chung!');
+      setMessage('Muốn rút bài? Hãy trả lời đúng câu hỏi biện chứng!');
     }
     setQuizFeedback(null);
   };
@@ -408,7 +403,7 @@ const CardGame = () => {
     if (gameState !== 'playing') return;
     const drawCount = Math.max(0, playerHand.length - 2);
     if (drawCount >= MAX_PLAYER_HITS || playerHand.length >= MAX_HAND_CARDS) {
-      setMessage('Ban da rut toi da 3 la (tong 5 la). Hay dung.');
+      setMessage('Bạn đã rút tối đa 3 lá (tổng 5 lá). Hãy dừng.');
       return;
     }
     const randomQuiz = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
@@ -433,9 +428,9 @@ const CardGame = () => {
       if (wrongAnswers >= 3) {
         setGameState('finished');
         setShowResultOverlay(true);
-        setRoundResult('dealer', 'BAN DA THUA! Sai 3 cau hoi, ban khong du trinh do de tiep tuc cuoc choi!');
+        setRoundResult('dealer', 'BẠN ĐÃ THUA! Sai 3 câu hỏi, bạn không đủ trình độ để tiếp tục cuộc chơi!');
       } else {
-        setMessage(`Sai roi! Ban khong duoc rut bai luot nay. (Sai ${wrongAnswers}/3 cau)`);
+        setMessage(`Sai rồi! Bạn không được rút bài lượt này. (Sai ${wrongAnswers}/3 câu)`);
       }
     }
     setShowQuiz(false);
@@ -444,7 +439,7 @@ const CardGame = () => {
   const executeHit = () => {
     const drawCount = Math.max(0, playerHand.length - 2);
     if (drawCount >= MAX_PLAYER_HITS || playerHand.length >= MAX_HAND_CARDS) {
-      setMessage('Ban da rut toi da 3 la (tong 5 la). Hay dung.');
+      setMessage('Bạn đã rút tối đa 3 lá (tổng 5 lá). Hãy dừng.');
       return;
     }
     const newDeck = [...deck];
@@ -463,24 +458,24 @@ const CardGame = () => {
     if (score > 21) {
       setGameState('finished');
       setShowResultOverlay(true);
-      setRoundResult('dealer', 'Qua 21 diem! Ban da thua.');
+      setRoundResult('dealer', 'Quá 21 điểm! Bạn đã thua.');
       return;
     }
     if (isNguLinh(newHand)) {
       setGameState('dealerTurn');
-      setMessage('Ban da NGU LINH! Cho nha cai lat bai...');
+      setMessage('Bạn đã NGŨ LINH! Chờ nhà cái lật bài...');
       return;
     }
     if (drawCount + 1 >= MAX_PLAYER_HITS) {
-      setMessage('Ban da rut du 3 la. Hay dung.');
+      setMessage('Bạn đã rút đủ 3 lá. Hãy dừng.');
       return;
     }
-    setMessage('Tra loi dung! Ban da nhan duoc mot la bai.');
+    setMessage('Trả lời đúng! Bạn đã nhận được một lá bài.');
   };
   const stand = () => {
     if (gameState !== 'playing') return;
     setGameState('dealerTurn');
-    setMessage('Luot cua Nha cai...');
+    setMessage('Lượt của nhà cái...');
   };
   useEffect(() => {
     if (gameState === 'dealerTurn') {
@@ -640,16 +635,16 @@ const CardGame = () => {
             <div className="flex justify-between items-center text-white px-4">
               <div className="flex flex-col">
                 <span className="font-black uppercase tracking-widest text-xs opacity-50 flex items-center gap-2">
-                  <Hand className="w-4 h-4" /> Ban
+                  <Hand className="w-4 h-4" /> Bạn
                 </span>
                 {wrongAnswers > 0 && (
                   <span className="text-[10px] text-red-500 font-bold uppercase tracking-tighter mt-1">
-                    Loi: {wrongAnswers}/3
+                    Lỗi: {wrongAnswers}/3
                   </span>
                 )}
                 {gameState === 'playing' && (
                   <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-tighter mt-1">
-                    Rut con: {remainingHits}/3
+                    Rút còn: {remainingHits}/3
                   </span>
                 )}
               </div>
@@ -687,7 +682,7 @@ const CardGame = () => {
                 }
               >
                 <HelpCircle className={'w-5 h-5 ' + (canHit ? 'text-soviet-red' : 'text-zinc-400')} />
-                {canHit ? 'Rut bai (Quiz) - con ' + remainingHits + '/3' : 'Da rut toi da 3 la'}
+                {canHit ? 'Rút bài (Quiz) - còn ' + remainingHits + '/3' : 'Đã rút tối đa 3 lá'}
               </button>
               <button
                 onClick={stand}
