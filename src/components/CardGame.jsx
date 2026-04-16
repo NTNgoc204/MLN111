@@ -14,298 +14,124 @@ const VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'
 
 const QUESTIONS = [
   {
-    q: "Câu nói 'Trong tự nhiên, không có gì tồn tại tách biệt' phản ánh nguyên lý nào của phép biện chứng?",
-    options: ["Nguyên lý về sự phát triển", "Nguyên lý về mối liên hệ phổ biến", "Quy luật phủ định của phủ định", "Quy luật lượng chất"],
+    q: "Tất yếu trong triết học Mác – Lênin được hiểu là gì?",
+    options: ["Điều xảy ra ngẫu nhiên", "Điều do quy luật khách quan chi phối", "Điều không thể giải thích", "Điều xảy ra do ý muốn con người"],
     correct: 1,
-    desc: "Mọi sự vật, hiện tượng đều tồn tại trong mối liên hệ, tác động qua lại lẫn nhau."
+    desc: "Tất yếu là cái do các quy luật khách quan quyết định."
   },
   {
-    q: "Phạm trù nào dùng để chỉ những thuộc tính giống nhau được lặp lại trong nhiều sự vật riêng lẻ?",
-    options: ["Cái Riêng", "Cái Đơn nhất", "Cái Chung", "Bản chất"],
+    q: "Tự do theo triết học Mác – Lênin là gì?",
+    options: ["Không bị ràng buộc", "Sống theo cảm xúc", "Nhận thức và hành động theo quy luật khách quan", "Làm theo ý muốn"],
     correct: 2,
-    desc: "Cái Chung là những mặt, những thuộc tính lặp lại ở nhiều cái riêng."
+    desc: "Tự do là hành động dựa trên hiểu biết quy luật."
   },
   {
-    q: "Trong mối quan hệ giữa Nguyên nhân và Kết quả, khẳng định nào sau đây là ĐÚNG?",
-    options: ["Kết quả luôn có trước nguyên nhân", "Nguyên nhân luôn sinh ra kết quả", "Nguyên nhân và kết quả không có mối liên hệ", "Một kết quả chỉ có duy nhất một nguyên nhân"],
-    correct: 1,
-    desc: "Nguyên nhân là cái sinh ra kết quả, nên luôn có trước kết quả."
-  },
-  {
-    q: "Cái gì quy định sự vận động và phát triển của sự vật từ bên trong?",
-    options: ["Hiện tượng", "Hình thức", "Bản chất", "Ngẫu nhiên"],
-    correct: 2,
-    desc: "Bản chất là tổng hợp các mặt, mối liên hệ tất yếu ổn định bên trong sự vật."
-  },
-  {
-    q: "Mối liên hệ 'Tất nhiên' là mối liên hệ như thế nào?",
-    options: ["Do nguyên nhân bên ngoài quyết định", "Có thể xảy ra hoặc không", "Do nguyên nhân cơ bản bên trong quyết định", "Mang tính tạm thời"],
-    correct: 2,
-    desc: "Tất nhiên là cái do nguyên nhân bên trong, bản chất của sự vật quyết định."
-  },
-  {
-    q: "Trong cặp phạm trù Nội dung - Hình thức, yếu tố nào thường xuyên biến đổi hơn?",
-    options: ["Hình thức", "Nội dung", "Cả hai biến đổi như nhau", "Cả hai đều đứng yên"],
-    correct: 1,
-    desc: "Nội dung là yếu tố động, thường xuyên biến đổi; hình thức tương đối ổn định."
-  },
-  {
-    q: "Khả năng chuyển hóa thành hiện thực khi có đủ các yếu tố nào?",
-    options: ["Chỉ cần ý muốn chủ quan", "Chỉ cần may mắn", "Điều kiện khách quan và nhân tố chủ quan", "Thời gian trôi qua"],
-    correct: 2,
-    desc: "Sự chuyển hóa từ khả năng thành hiện thực cần các điều kiện khách quan và nỗ lực chủ quan."
-  },
-  {
-    q: "Quan điểm 'toàn diện' yêu cầu chúng ta điều gì khi nhìn nhận một vấn đề?",
-    options: ["Chỉ nhìn vào mặt tích cực", "Xem xét mọi mặt, mọi mối liên hệ của sự vật", "Chỉ nhìn vào kết quả cuối cùng", "Bỏ qua các yếu tố bên ngoài"],
-    correct: 1,
-    desc: "Quan điểm toàn diện đòi hỏi xem xét sự vật trong mọi mối liên hệ và tác động qua lại."
-  },
-  {
-    q: "Một 'Kết quả' sau khi xuất hiện có thể tác động ngược lại 'Nguyên nhân' không?",
-    options: ["Không bao giờ", "Chỉ trong trường hợp hiếm", "Có, nó tác động ngược lại nguyên nhân đã sinh ra nó", "Chỉ khi nguyên nhân biến mất"],
-    correct: 2,
-    desc: "Biện chứng nhân quả cho thấy kết quả có thể tác động ngược lại nguyên nhân."
-  },
-  {
-    q: "Tại sao nói 'Kết quả có thể trở thành Nguyên nhân mới'?",
-    options: ["Vì thế giới là một chuỗi liên hệ nhân quả vô tận", "Vì kết quả không quan trọng", "Vì nguyên nhân luôn biến mất", "Vì sự vật không thay đổi"],
+    q: "Quan điểm nào cho rằng tự do là tuyệt đối?",
+    options: ["Duy tâm", "Mác – Lênin", "Duy vật biện chứng", "Duy vật lịch sử"],
     correct: 0,
-    desc: "Mối liên hệ nhân quả là một chuỗi vô tận, kết quả của khâu này là nguyên nhân của khâu tiếp theo."
+    desc: "Duy tâm thường tuyệt đối hóa tự do."
   },
   {
-    q: "Engels khẳng định: 'In nature, nothing takes place in isolation'. Điều này có nghĩa gì?",
-    options: ["Mọi sự vật đều cô lập", "Tự nhiên là một khối thống nhất liên kết", "Sự vật chỉ liên hệ khi ta nhìn thấy", "Tự nhiên vận động không theo quy luật"],
+    q: "Thuyết định mệnh thuộc trường phái nào?",
+    options: ["Hiện sinh", "Duy vật siêu hình", "Duy tâm", "Duy vật biện chứng"],
     correct: 1,
-    desc: "Engels chỉ ra tính khách quan và phổ biến của các mối liên hệ trong thế giới tự nhiên."
+    desc: "Thuyết định mệnh cho rằng mọi thứ đã định sẵn."
   },
   {
-    q: "Theo Engels, mối liên hệ giữa các sự vật trong tự nhiên mang tính chất gì?",
-    options: ["Ngẫu nhiên tuyệt đối", "Chủ quan của con người", "Khách quan và phổ biến", "Tạm thời và rời rạc"],
+    q: "Theo Mác – Lênin, cơ sở của tự do là gì?",
+    options: ["Cảm xúc", "Niềm tin", "Tất yếu", "Ý chí"],
     correct: 2,
-    desc: "Mối liên hệ là thuộc tính vốn có của thế giới vật chất, tồn tại độc lập với ý thức."
+    desc: "Tự do dựa trên quy luật khách quan."
   },
   {
-    q: "Việc phá rừng dẫn đến lũ lụt minh chứng cho cặp phạm trù nào?",
-    options: ["Cái chung - Cái riêng", "Nguyên nhân - Kết quả", "Bản chất - Hiện tượng", "Khả năng - Hiện thực"],
+    q: "Tự do là kết quả của điều gì?",
+    options: ["Ý chí", "Nhận thức tất yếu", "May mắn", "Cảm xúc"],
     correct: 1,
-    desc: "Tác động vào tự nhiên (nguyên nhân) dẫn đến những biến đổi môi trường (kết quả)."
+    desc: "Hiểu quy luật → hành động đúng → tự do."
   },
   {
-    q: "Phạm trù 'Khả năng' dùng để chỉ điều gì?",
-    options: ["Cái đang có thực", "Cái chưa có, nhưng sẽ có khi có đủ điều kiện", "Cái không bao giờ xảy ra", "Cái đã xảy ra trong quá khứ"],
+    q: "Quan hệ giữa tự do và tất yếu là gì?",
+    options: ["Không liên quan", "Biện chứng", "Đối lập", "Loại trừ nhau"],
     correct: 1,
-    desc: "Khả năng là cái chưa có, nhưng sẽ xuất hiện khi có các điều kiện tương ứng."
+    desc: "Hai phạm trù thống nhất với nhau."
   },
   {
-    q: "Mối liên hệ giữa 'Cái riêng' và 'Cái chung' là gì?",
-    options: ["Cái riêng nằm ngoài cái chung", "Cái chung nằm ngoài cái riêng", "Cái chung chỉ tồn tại trong cái riêng", "Cái riêng và cái chung không liên quan"],
+    q: "Quan điểm nào phủ nhận vai trò con người?",
+    options: ["Thuyết định mệnh", "Mác – Lênin", "Biện chứng", "Duy tâm"],
+    correct: 0,
+    desc: "Định mệnh xem con người bị chi phối hoàn toàn."
+  },
+  {
+    q: "Điều kiện để đạt tự do là gì?",
+    options: ["May mắn", "Có quyền lực", "Hiểu và vận dụng quy luật", "Có tiền"],
     correct: 2,
-    desc: "Cái chung không tồn tại biệt lập, nó chỉ tồn tại trong cái riêng, thông qua cái riêng."
+    desc: "Hiểu quy luật là chìa khóa."
   },
   {
-    q: "Phạm trù 'Hình thức' trong triết học dùng để chỉ:",
-    options: ["Vẻ bề ngoài của sự vật", "Cách thức liên kết các yếu tố của nội dung", "Chỉ là màu sắc sự vật", "Vật chất cấu tạo nên sự vật"],
-    correct: 1,
-    desc: "Hình thức là hệ thống các mối liên hệ tương đối ổn định giữa các yếu tố của nội dung."
-  },
-  {
-    q: "Hiện tượng là gì?",
-    options: ["Mặt bên trong của sự vật", "Mặt biểu hiện ra bên ngoài của bản chất", "Cái không thay đổi của sự vật", "Quy luật vận động của sự vật"],
-    correct: 1,
-    desc: "Hiện tượng là sự biểu hiện của những mặt, những khía cạnh của bản chất ra bên ngoài."
-  },
-  {
-    q: "Cái 'Đơn nhất' có thể biến thành cái 'Chung' không?",
-    options: ["Không bao giờ", "Có, trong quá trình phát triển của sự vật", "Chỉ trong tư duy", "Chỉ khi sự vật mất đi"],
-    correct: 1,
-    desc: "Trong quá trình vận động, cái mới (đơn nhất) có thể phát triển thành cái chung, và ngược lại."
-  },
-  {
-    q: "Nguyên tắc 'Lịch sử - cụ thể' đòi hỏi điều gì?",
-    options: ["Chỉ nhìn vào quá khứ", "Xem xét sự vật trong không gian, thời gian xác định", "Bỏ qua các chi tiết nhỏ", "Chỉ quan tâm đến tương lai"],
-    correct: 1,
-    desc: "Mọi sự vật đều tồn tại trong những điều kiện không gian và thời gian cụ thể."
-  },
-  {
-    q: "Trong các loại khả năng, 'Khả năng thực tế' là gì?",
-    options: ["Do may mắn", "Do các mối liên hệ tất nhiên bên trong quy định", "Do ý muốn con người", "Do tác động ngẫu nhiên bên ngoài"],
-    correct: 1,
-    desc: "Khả năng thực tế được hình thành do các quy luật vận động nội tại của sự vật."
-  },
-  {
-    q: "Mối quan hệ giữa 'Nội dung' và 'Hình thức' là mối quan hệ:",
-    options: ["Tách rời nhau", "Nội dung quyết định hình thức", "Hình thức quyết định nội dung", "Không có ảnh hưởng lẫn nhau"],
-    correct: 1,
-    desc: "Nội dung giữ vai trò quyết định, hình thức phụ thuộc vào nội dung và có tính độc lập tương đối."
-  },
-  {
-    q: "Phạm trù 'Tất nhiên' và 'Ngẫu nhiên' khác nhau ở điểm nào?",
-    options: ["Tất nhiên là cái có thể xảy ra, ngẫu nhiên là cái phải xảy ra", "Tất nhiên do nguyên nhân bên trong, ngẫu nhiên do nguyên nhân bên ngoài", "Cả hai đều do nguyên nhân bên ngoài", "Cả hai đều là ảo giác"],
-    correct: 1,
-    desc: "Tất nhiên xuất phát từ bản chất nội tại, ngẫu nhiên xuất phát từ sự giao thoa các điều kiện bên ngoài."
-  },
-  {
-    q: "Vì sao phải dựa vào 'Tất nhiên' trong hoạt động thực tiễn?",
-    options: ["Vì nó dễ thấy hơn", "Vì nó là cái vạch đường đi cho sự phát triển", "Vì nó không thay đổi", "Vì nó luôn mang lại may mắn"],
-    correct: 1,
-    desc: "Tất nhiên là cái định hướng sự phát triển, nên cần dựa vào nó để lập kế hoạch."
-  },
-  {
-    q: "Sự tương tác giữa các loài trong hệ sinh thái phản ánh điều gì?",
-    options: ["Cuộc đấu tranh sinh tồn tách biệt", "Mạng lưới liên hệ phổ biến", "Sự đứng yên của tự nhiên", "Tính đơn nhất của sự vật"],
-    correct: 1,
-    desc: "Mọi loài đều là mắt xích trong chuỗi liên hệ phức tạp của hệ sinh thái."
-  },
-  {
-    q: "Engels viết tác phẩm nào để trình bày các quy luật của tự nhiên?",
-    options: ["Tư bản", "Biện chứng của tự nhiên", "Chống Dühring", "Nguồn gốc của gia đình"],
-    correct: 1,
-    desc: "Tác phẩm 'Biện chứng của tự nhiên' là nơi Engels hệ thống hóa các quy luật vận động của thế giới tự nhiên."
-  },
-  {
-    q: "Tại sao tư duy siêu hình lại sai lầm khi nhìn về tự nhiên?",
-    options: ["Vì nó nhìn thấy sự liên hệ", "Vì nó nhìn sự vật trong trạng thái cô lập, tĩnh tại", "Vì nó quá phức tạp", "Vì nó phủ nhận sự tồn tại của vật chất"],
-    correct: 1,
-    desc: "Tư duy siêu hình chỉ thấy những sự vật riêng biệt mà không thấy mối liên hệ giữa chúng."
-  },
-  {
-    q: "Mối liên hệ giữa trái đất và mặt trời là minh chứng cho loại liên hệ nào?",
-    options: ["Liên hệ bên trong", "Liên hệ bên ngoài nhưng tất yếu", "Liên hệ ngẫu nhiên", "Liên hệ không bản chất"],
-    correct: 1,
-    desc: "Các hành tinh liên kết với nhau bằng lực hấp dẫn - một liên hệ tất yếu của vũ trụ."
-  },
-  {
-    q: "Câu nói của Engels nhấn mạnh vai trò của phương pháp luận nào?",
-    options: ["Phương pháp phân tích rời rạc", "Phương pháp biện chứng", "Phương pháp thực nghiệm thuần túy", "Phương pháp diễn dịch"],
-    correct: 1,
-    desc: "Phép biện chứng cho phép nhìn nhận thế giới như một chỉnh thể vận động và liên kết."
-  },
-  {
-    q: "Biến đổi khí hậu toàn cầu minh chứng cho điều gì trong học thuyết Engels?",
-    options: ["Sự độc lập của các quốc gia", "Tính phổ biến của các mối liên hệ", "Sự ngẫu nhiên của thời tiết", "Sự bất biến của môi trường"],
-    correct: 1,
-    desc: "Một tác động tại một nơi có thể gây ra hệ quả trên toàn cầu do tính liên kết phổ biến."
-  },
-  {
-    q: "Phép biện chứng duy vật là gì?",
-    options: ["Khoa học về các mối liên hệ phổ biến và sự phát triển", "Khoa học về sự đứng yên", "Cách nhìn thế giới cô lập", "Sự kết hợp các ý kiến chủ quan"],
+    q: "Tự do nghĩa là gì?",
+    options: ["Làm chủ tự nhiên nhờ hiểu quy luật", "Thoát khỏi quy luật", "Thoát khỏi tự nhiên", "Sống tách biệt"],
     correct: 0,
-    desc: "Phép biện chứng duy vật nghiên cứu những quy luật chung nhất của tự nhiên, xã hội và tư duy."
+    desc: "Tự do là làm chủ chứ không thoát ly."
   },
   {
-    q: "Thế nào là 'Cái đơn nhất'?",
-    options: ["Cái lặp lại ở nhiều sự vật", "Cái chỉ có ở một sự vật hiện tượng", "Cái không bao giờ thay đổi", "Cái bao quát toàn bộ thế giới"],
+    q: "Vai trò của khoa học là gì?",
+    options: ["Không liên quan", "Giúp hiểu quy luật", "Giải trí", "Không quan trọng"],
     correct: 1,
-    desc: "Cái đơn nhất là những đặc điểm riêng biệt, chỉ có ở một thực thể duy nhất."
+    desc: "Khoa học giúp nhận thức tất yếu."
   },
   {
-    q: "Tại sao nói 'Cái chung sâu sắc hơn cái riêng'?",
-    options: ["Vì nó to lớn hơn", "Vì nó phản ánh những mối liên hệ bản chất, tất nhiên", "Vì nó dễ nhận biết hơn", "Vì nó tồn tại lâu hơn"],
+    q: "Thực tiễn có vai trò gì?",
+    options: ["Không cần thiết", "Chuyển nhận thức thành hành động", "Không liên quan", "Làm giảm tự do"],
     correct: 1,
-    desc: "Cái chung phản ánh những thuộc tính mang tính quy luật, bản chất của sự vật."
+    desc: "Thực tiễn là cầu nối."
   },
   {
-    q: "Điều kiện để 'Khả năng' trở thành 'Hiện thực' là gì?",
-    options: ["Thời gian tự trôi qua", "Sự hội tụ các điều kiện khách quan và nhân tố chủ quan", "Chỉ cần suy nghĩ tích cực", "Sự biến mất của các quy luật"],
-    correct: 1,
-    desc: "Hiện thực chỉ xuất hiện khi các điều kiện cần và đủ cho khả năng đó được đáp ứng."
-  },
-  {
-    q: "Engels cho rằng con người cần làm gì đối với các mối liên hệ trong tự nhiên?",
-    options: ["Chinh phục bất chấp quy luật", "Nhận thức và vận dụng đúng các quy luật", "Bỏ qua vì nó quá rộng lớn", "Thay đổi quy luật theo ý muốn"],
-    correct: 1,
-    desc: "Con người chỉ có thể tự do khi nhận thức và hành động theo đúng quy luật khách quan."
-  },
-  {
-    q: "Phạm trù 'Kết quả' dùng để chỉ điều gì?",
-    options: ["Sự biến đổi xuất hiện do sự tác động lẫn nhau giữa các mặt, các yếu tố", "Cái có trước nguyên nhân", "Cái luôn luôn đứng yên", "Sự tác động từ bên ngoài vào sự vật"],
+    q: "Quan điểm 'mọi thứ do số phận' là gì?",
+    options: ["Định mệnh", "Mác – Lênin", "Biện chứng", "Duy tâm"],
     correct: 0,
-    desc: "Kết quả là những biến đổi xuất hiện do sự tác động giữa các nguyên nhân."
+    desc: "Định mệnh phủ nhận vai trò con người."
   },
   {
-    q: "Mối liên hệ giữa bản chất và hiện tượng là gì?",
-    options: ["Bản chất và hiện tượng luôn đồng nhất", "Bản chất biểu hiện thông qua hiện tượng", "Bản chất và hiện tượng không liên quan", "Hiện tượng quyết định bản chất"],
-    correct: 1,
-    desc: "Bản chất luôn bộc lộ thông qua hiện tượng, còn hiện tượng là sự biểu hiện của bản chất."
+    q: "Sai lầm của duy ý chí là gì?",
+    options: ["Phủ nhận quy luật", "Nhận thức đúng", "Đề cao khoa học", "Tôn trọng quy luật"],
+    correct: 0,
+    desc: "Duy ý chí coi ý chí quyết định tất cả."
   },
   {
-    q: "Trong đời sống xã hội, 'Nhân tố chủ quan' có vai trò gì trong việc biến khả năng thành hiện thực?",
-    options: ["Không có vai trò gì", "Có vai trò quyết định hoàn toàn", "Là điều kiện quan trọng để thúc đẩy khả năng thành hiện thực", "Làm khả năng biến mất"],
+    q: "Nguyên tắc quan trọng là gì?",
+    options: ["Không học tập", "Theo cảm tính", "Tôn trọng quy luật", "Chỉ tin bản thân"],
     correct: 2,
-    desc: "Trong xã hội, sự hoạt động có ý thức của con người là mắt xích quan trọng để chuyển khả năng thành hiện thực."
+    desc: "Phải tôn trọng quy luật khách quan."
   },
   {
-    q: "Vì sao nói 'Ngẫu nhiên là hình thức biểu hiện của tất nhiên'?",
-    options: ["Vì ngẫu nhiên che lấp tất nhiên", "Vì tất nhiên vạch đường đi thông qua vô số cái ngẫu nhiên", "Vì ngẫu nhiên và tất nhiên là một", "Vì ngẫu nhiên quan trọng hơn"],
+    q: "Tự do tăng khi nào?",
+    options: ["Không hành động", "Hiểu rõ quy luật", "Ít hiểu biết", "Phụ thuộc"],
     correct: 1,
-    desc: "Phía sau những cái có vẻ ngẫu nhiên là những quy luật tất yếu đang vận động."
+    desc: "Hiểu biết càng cao → tự do càng lớn."
   },
   {
-    q: "Sự phân biệt giữa 'Khả năng' và 'Hiện thực' có tính chất gì?",
-    options: ["Tuyệt đối, không thể thay đổi", "Tương đối, chúng có thể chuyển hóa cho nhau", "Chỉ là ảo giác của con người", "Chỉ tồn tại trong toán học"],
+    q: "Tất yếu tồn tại ở đâu?",
+    options: ["Trong mơ", "Trong thế giới khách quan", "Trong ý thức", "Trong tưởng tượng"],
     correct: 1,
-    desc: "Khả năng và hiện thực luôn chuyển hóa lẫn nhau trong quá trình phát triển."
+    desc: "Tất yếu thuộc về khách quan."
   },
   {
-    q: "Khi một 'Hình thức' không còn phù hợp với 'Nội dung' thì điều gì sẽ xảy ra?",
-    options: ["Nội dung sẽ dừng lại", "Hình thức sẽ kìm hãm sự phát triển của nội dung", "Nội dung sẽ biến mất", "Hình thức sẽ trở nên vĩnh cửu"],
-    correct: 1,
-    desc: "Hình thức phù hợp sẽ thúc đẩy, còn không phù hợp sẽ kìm hãm sự phát triển của nội dung."
+    q: "Biểu hiện của tự do là gì?",
+    options: ["Hành động cảm tính", "Không hành động", "Hành động phù hợp quy luật", "Mù quáng"],
+    correct: 2,
+    desc: "Hành động đúng quy luật là tự do."
   },
   {
-    q: "Đặc điểm của 'Cái riêng' là gì?",
-    options: ["Nó vô cùng phong phú, đa dạng hơn cái chung", "Nó đơn giản hơn cái chung", "Nó không bao giờ thay đổi", "Nó nằm ngoài mọi mối liên hệ"],
+    q: "Con đường đến tự do là gì?",
+    options: ["Nhận thức → thực tiễn", "Ý chí → may mắn", "Cảm xúc → hành động", "Bỏ qua thực tiễn"],
     correct: 0,
-    desc: "Cái riêng bao hàm cái chung nhưng còn có những đặc điểm đơn nhất nên phong phú hơn."
+    desc: "Nhận thức + thực tiễn."
   },
   {
-    q: "Tại sao không được phủ nhận cái 'Ngẫu nhiên' trong cuộc sống?",
-    options: ["Vì ngẫu nhiên là tất cả", "Vì ngẫu nhiên có thể gây ra những bước ngoặt bất ngờ", "Vì ngẫu nhiên không có nguyên nhân", "Vì ngẫu nhiên dễ kiểm soát"],
-    correct: 1,
-    desc: "Dù tất nhiên là chính, nhưng ngẫu nhiên cũng ảnh hưởng đến tiến trình phát triển của sự vật."
-  },
-  {
-    q: "Mối liên hệ nhân quả mang tính 'Phổ biến' nghĩa là gì?",
-    options: ["Chỉ xảy ra ở một số nơi", "Mọi sự vật hiện tượng đều có nguyên nhân của nó", "Chỉ xảy ra trong tư duy", "Chỉ xảy ra trong phòng thí nghiệm"],
-    correct: 1,
-    desc: "Không có sự vật nào xuất hiện mà không có nguyên nhân, dù ta có biết hay chưa."
-  },
-  {
-    q: "Phạm trù 'Nội dung' dùng để chỉ:",
-    options: ["Vẻ ngoài của sự vật", "Tổng hợp tất cả các mặt, yếu tố tạo nên sự vật", "Mối liên hệ giữa các sự vật", "Sự vận động của sự vật"],
-    correct: 1,
-    desc: "Nội dung là phạm trù chỉ tổng thể các yếu tố, quá trình tạo nên sự vật."
-  },
-  {
-    q: "Bản chất là cái 'Ổn định', điều này có nghĩa là gì?",
-    options: ["Bản chất không bao giờ thay đổi", "Bản chất biến đổi chậm hơn so với hiện tượng", "Bản chất luôn đứng yên", "Bản chất là vĩnh cửu"],
-    correct: 1,
-    desc: "Bản chất có tính ổn định tương đối, nó không biến đổi nhanh chóng như các hiện tượng bề ngoài."
-  },
-  {
-    q: "Thế nào là 'Khả năng tất yếu'?",
-    options: ["Xảy ra do may mắn", "Xảy ra do bản chất nội tại của sự vật quy định", "Xảy ra do ý muốn chủ quan", "Không bao giờ xảy ra"],
-    correct: 1,
-    desc: "Khả năng tất yếu là khả năng chắc chắn sẽ xảy ra khi có đủ điều kiện."
-  },
-  {
-    q: "Sự khác biệt giữa 'Nguyên nhân' và 'Điều kiện' là gì?",
-    options: ["Không có sự khác biệt", "Nguyên nhân trực tiếp sinh ra kết quả, điều kiện chỉ hỗ trợ", "Điều kiện sinh ra kết quả", "Nguyên nhân chỉ là phụ"],
-    correct: 1,
-    desc: "Nguyên nhân là cái sinh ra kết quả, còn điều kiện là những yếu tố cần thiết để nguyên nhân phát huy tác dụng."
-  },
-  {
-    q: "Quan điểm 'Chiết trung' sai lầm ở chỗ nào khi xem xét các mối liên hệ?",
-    options: ["Nó quá chú trọng vào bản chất", "Nó kết hợp các mặt một cách vô nguyên tắc, tùy tiện", "Nó chỉ nhìn vào một mặt", "Nó quá máy móc"],
-    correct: 1,
-    desc: "Ngụy biện và chiết trung đều sai lầm vì không xác định được mối liên hệ bản chất, chủ yếu."
-  },
-  {
-    q: "Để hiểu đúng 'Bản chất', chúng ta phải làm gì?",
-    options: ["Chỉ cần quan sát một hiện tượng", "Phân tích nhiều hiện tượng khác nhau để tìm ra cái chung, lặp lại", "Dựa vào trực giác", "Bỏ qua các hiện tượng"],
-    correct: 1,
-    desc: "Bản chất không lộ diện trực tiếp, ta phải thông qua quá trình tư duy và tổng hợp nhiều hiện tượng."
+    q: "Mối quan hệ này giúp con người gì?",
+    options: ["Không học", "Thụ động", "Chủ động cải tạo thế giới", "Bị ràng buộc"],
+    correct: 2,
+    desc: "Giúp con người chủ động."
   }
 ];
 
