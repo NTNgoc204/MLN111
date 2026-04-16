@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
 const MindmapPage = () => {
   return (
@@ -26,9 +26,14 @@ const MindmapPage = () => {
           className="bg-white rounded-lg shadow-2xl p-8 border-4 border-soviet-red overflow-hidden"
         >
           <iframe
-            src="https://www.mymap.ai/share/nguyn-l-mi-lin-h-ph-bin-vVAuHEDUGtXjZ"
+            src="https://gitmind.com/app/docs/m08fle2h"
             title="Sơ đồ Tư duy - Mối liên hệ phổ biến"
-            style={{ width: '100%', height: '700px', border: 'none', borderRadius: '8px' }}
+            style={{
+              width: "100%",
+              height: "700px",
+              border: "none",
+              borderRadius: "8px",
+            }}
             allowFullScreen
             loading="lazy"
           ></iframe>
@@ -40,26 +45,42 @@ const MindmapPage = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-12 bg-gradient-to-br from-soviet-offwhite to-white rounded-lg p-8 border-2 border-soviet-gold"
         >
-          <p className="text-lg font-black text-soviet-red mb-4">💡 Về Sơ đồ Tư duy này</p>
-          <p className="text-base text-zinc-700 leading-relaxed mb-6">
-            Sơ đồ tư duy này thể hiện mối liên hệ toàn diện giữa các khái niệm cơ bản trong triết học biện chứng duy vật, 
-            bao gồm 6 cặp phạm trù chính và cách chúng tương tác với nhau trong quá trình phát triển.
+          <p className="text-lg font-black text-soviet-red mb-4">
+            💡 Về Sơ đồ Tư duy này
           </p>
-          
+          <p className="text-base text-zinc-700 leading-relaxed mb-6">
+            Sơ đồ tư duy này thể hiện mối quan hệ biện chứng giữa hai phạm trù
+            cốt lõi trong triết học Mác - Lênin là Tự do và Tất yếu, mô tả quá
+            trình con người nhận thức quy luật để đi từ sự thụ thuộc đến việc
+            làm chủ thế giới khách quan.
+          </p>
+
           <div className="space-y-3">
             <p className="font-black text-zinc-700">Các khái niệm chính:</p>
             <ul className="space-y-2 text-zinc-600">
               <li className="flex items-start gap-3">
                 <span className="text-soviet-red font-black">•</span>
-                <span><strong>Mối liên hệ phổ biến</strong> - Mọi sự vật đều có liên hệ toàn diện</span>
+                <span>
+                  <strong>Tất yếu</strong> - Những quy luật khách quan của tự
+                  nhiên và xã hội, tồn tại và vận hành hoàn toàn độc lập với ý
+                  chí con người.
+                </span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-soviet-red font-black">•</span>
-                <span><strong>Phát triển</strong> - Sự biến đổi liên tục từ lượng sang chất</span>
+                <span>
+                  <strong>Tự do</strong> - Sự biến đổi liên tục từ lượng sang
+                  chấtSự nhận thức được cái tất yếu và năng lực vận dụng các quy
+                  luật đó một cách có ý thức vào hoạt động thực tiễn.
+                </span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-soviet-red font-black">•</span>
-                <span><strong>Biện chứng</strong> - Mâu thuẫn là nguồn động lực phát triển</span>
+                <span>
+                  <strong>Mối quan hệ biện chứng</strong> - Tất yếu là tiền đề
+                  của tự do; thông qua hoạt động thực tiễn, con người biến quy
+                  luật khách quan thành công cụ để phục vụ lợi ích của mình.
+                </span>
               </li>
             </ul>
           </div>
