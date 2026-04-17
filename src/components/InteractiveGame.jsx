@@ -1,49 +1,126 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CircleCheck, CircleAlert, ArrowLeft } from 'lucide-react';
+import { CircleCheck, CircleAlert } from 'lucide-react';
 
-const initialItems = [
-  { id: 1, cause: "Tăng lượng khí thải CO₂", effect: "Hiệu ứng nhà kính gia tăng" },
-  { id: 2, cause: "Sự nóng lên của khí quyển", effect: "Băng tan ở hai cực" },
-  { id: 3, cause: "Nước biển dâng cao", effect: "Sâm thực mặn và mất đất ven biển" },
-  { id: 4, cause: "Mất cân bằng sinh thái", effect: "Sự tuyệt chủng của các loài" },
+const orderedChallengeItems = [
+  {
+    id: 'E',
+    sentence: 'Phải kiếm tiền để sống (tất yếu đầu tiên: nhu cầu sinh tồn).',
+    explanation: 'Trước hết, ai cũng phải kiếm tiền để sống - đó là tất yếu đầu tiên.',
+  },
+  {
+    id: 'F',
+    sentence: 'Phải học một nghề/có chuyên môn (tất yếu thứ hai: nếu không thì chỉ làm việc chân tay bấp bênh).',
+    explanation: 'Muốn kiếm tiền ổn định thì phải có nghề/chuyên môn - tất yếu thứ hai.',
+  },
+  {
+    id: 'B',
+    sentence: 'Phải có việc làm ổn định để không bị phụ thuộc vào trợ cấp hay vay nợ.',
+    explanation: 'Có nghề rồi cần việc làm ổn định để khỏi bị lệ thuộc.',
+  },
+  {
+    id: 'C',
+    sentence: 'Có kỹ năng hoặc bằng cấp -> dễ xin việc hơn, không bị ép làm việc bất kỳ lúc nào.',
+    explanation: 'Có kỹ năng tốt thì không bị ép làm thêm giờ, có thể từ chối làm việc trái ý.',
+  },
+  {
+    id: 'A',
+    sentence: 'Có tiền nhàn rỗi -> được lựa chọn nghỉ ngơi, học tập, du lịch (tự do thời gian).',
+    explanation: 'Có tiền nhàn rỗi -> mới có tự do thời gian, tự do tiêu dùng.',
+  },
+  {
+    id: 'D',
+    sentence: 'Được chọn nơi làm việc phù hợp với sở thích -> bắt đầu có tự do nghề nghiệp.',
+    explanation: 'Được chọn nơi làm việc mình thích - tự do nghề nghiệp.',
+  },
+  {
+    id: 'G',
+    sentence: 'Chủ động từ chối những công việc độc hại, trái lương tâm -> tự do thực sự.',
+    explanation: 'Cao nhất: tự do từ chối việc xấu, sống đúng giá trị mình muốn.',
+  },
 ];
 
+const randomShuffle = (items) => [...items].sort(() => Math.random() - 0.5);
+
+const shuffleWithoutCorrectPositions = (items) => {
+  // Try to generate a derangement so no card starts in its correct slot.
+  const maxAttempts = 200;
+
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    const shuffled = randomShuffle(items);
+    const hasCorrectPosition = shuffled.some((item, index) => item.id === items[index].id);
+
+    if (!hasCorrectPosition) {
+      return shuffled;
+    }
+  }
+
+  // Safe fallback: rotate list by one slot (guaranteed for list length > 1).
+  if (items.length > 1) {
+    return [...items.slice(1), items[0]];
+  }
+
+  return [...items];
+};
+
+const moveItem = (list, fromIndex, toIndex) => {
+  const nextList = [...list];
+  const [moved] = nextList.splice(fromIndex, 1);
+  nextList.splice(toIndex, 0, moved);
+  return nextList;
+};
+
+const getCorrectPrefixLength = (cards) => {
+  let count = 0;
+  while (count < cards.length && cards[count].id === orderedChallengeItems[count].id) {
+    count += 1;
+  }
+  return count;
+};
+
 const InteractiveGame = () => {
-  const [selectedCause, setSelectedCause] = useState(null);
-  const [matches, setMatches] = useState([]);
-  const [lastMatchedId, setLastMatchedId] = useState(null);
-  const [shuffledEffects, setShuffledEffects] = useState([]);
+  const [cards, setCards] = useState([]);
+  const [draggingIndex, setDraggingIndex] = useState(null);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Shuffle effects to make it a real game
-    setShuffledEffects([...initialItems].sort(() => Math.random() - 0.5));
+    setCards(shuffleWithoutCorrectPositions(orderedChallengeItems));
   }, []);
 
-  const handleMatch = (effect) => {
-    if (!selectedCause) {
-      setError("Hãy chọn một nguyên nhân trước!");
-      setTimeout(() => setError(null), 2000);
+  const correctPrefixLength = getCorrectPrefixLength(cards);
+
+  useEffect(() => {
+    if (!cards.length) {
       return;
     }
 
-    if (selectedCause.id === effect.id) {
-      const newMatches = [...matches, selectedCause.id];
-      setMatches(newMatches);
-      setLastMatchedId(selectedCause.id);
-      setSelectedCause(null);
-      setError(null);
-      
-      if (newMatches.length === initialItems.length) {
-        setSuccess(true);
-      }
-    } else {
-      setError("Sai rồi! Hãy thử lại liên kết khác.");
-      setTimeout(() => setError(null), 2000);
-      setSelectedCause(null);
+    const allCorrect = getCorrectPrefixLength(cards) === orderedChallengeItems.length;
+    setSuccess(allCorrect);
+  }, [cards]);
+
+  const handleDropAt = (dropIndex) => {
+    if (draggingIndex === null) {
+      setError('Hãy kéo một ô câu trước khi thả.');
+      setTimeout(() => setError(null), 1800);
+      return;
     }
+
+    if (draggingIndex === dropIndex) {
+      setDraggingIndex(null);
+      return;
+    }
+
+    setCards((prev) => moveItem(prev, draggingIndex, dropIndex));
+    setDraggingIndex(null);
+    setError(null);
+  };
+
+  const handleReset = () => {
+    setCards(shuffleWithoutCorrectPositions(orderedChallengeItems));
+    setDraggingIndex(null);
+    setSuccess(false);
+    setError(null);
   };
 
   return (
@@ -56,93 +133,91 @@ const InteractiveGame = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold text-soviet-red mb-6 uppercase tracking-tight">
-            Thử Thách Nhân Quả
+            Thử Thách Tự Do
           </h2>
-          <p className="text-lg text-zinc-500 max-w-2xl mx-auto font-medium">
-            Mọi sự vật đều nằm trong chuỗi liên hệ. Hãy kết nối đúng Nguyên nhân với Kết quả biện chứng.
+          <p className="text-lg text-zinc-500 max-w-3xl mx-auto font-medium leading-relaxed">
+            Kéo và thả các ô câu để sắp xếp theo đúng trình tự từ tất yếu đến tự do trong đời sống thực tế.
+            Ô nào vào đúng vị trí sẽ hiện ngay diễn giải thực tế tương ứng.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Causes Column */}
-          <div className="space-y-4">
-            <div className="text-center mb-8">
-              <span className="bg-soviet-red text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">Nguyên Nhân</span>
-            </div>
-            {initialItems.map((item) => (
-              <motion.button
-                key={item.id}
-                whileHover={{ scale: matches.includes(item.id) ? 1 : 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => !matches.includes(item.id) && setSelectedCause(item)}
-                disabled={matches.includes(item.id)}
-                className={`w-full p-6 rounded-2xl border-2 text-left transition-all relative overflow-hidden group ${
-                  matches.includes(item.id)
-                    ? 'bg-zinc-50 border-zinc-200 text-zinc-300'
-                    : selectedCause?.id === item.id
-                    ? 'border-soviet-red bg-soviet-red/5 text-soviet-red shadow-lg shadow-soviet-red/10'
-                    : 'border-zinc-100 bg-white text-zinc-700 hover:border-soviet-red/30 hover:shadow-md'
-                }`}
-              >
-                <div className="flex justify-between items-center relative z-10">
-                  <span className="font-bold text-lg">{item.cause}</span>
-                  {matches.includes(item.id) && <CircleCheck className="text-green-500 w-6 h-6" />}
-                </div>
-                {selectedCause?.id === item.id && (
-                  <motion.div layoutId="active-indicator" className="absolute bottom-0 left-0 h-1 bg-soviet-red w-full" />
-                )}
-              </motion.button>
-            ))}
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="bg-soviet-red text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
+              Sắp Xếp Theo Thứ Tự Đúng
+            </span>
           </div>
 
-          {/* Effects Column */}
           <div className="space-y-4">
-            <div className="text-center mb-8">
-              <span className="bg-soviet-orange text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">Kết Quả</span>
-            </div>
-            {shuffledEffects.map((item) => (
-              <motion.button
-                key={item.id}
-                whileHover={{ scale: matches.includes(item.id) ? 1 : 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => !matches.includes(item.id) && handleMatch(item)}
-                disabled={matches.includes(item.id)}
-                className={`w-full p-6 rounded-2xl border-2 text-left transition-all relative overflow-hidden ${
-                  matches.includes(item.id)
-                    ? 'bg-zinc-50 border-zinc-100 text-zinc-400 opacity-40'
-                    : 'border-zinc-100 bg-white text-zinc-700 hover:border-soviet-orange/30 hover:shadow-md'
-                }`}
-              >
-                <div className="flex justify-between items-center">
-                  <span className="font-bold text-lg">{item.effect}</span>
-                  {matches.includes(item.id) && (
-                    <div className="flex items-center gap-2">
-                      <CircleCheck className="text-green-500 w-6 h-6" />
-                    </div>
-                  )}
-                </div>
+            {cards.map((item, index) => {
+              const isCorrect = index < correctPrefixLength;
+              const isCurrentTarget = index === correctPrefixLength;
 
-                {/* Arrow and Feedback for correct match */}
-                {matches.includes(item.id) && (
-                  <motion.div 
-                    initial={{ x: 50, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    className="absolute inset-0 bg-white/90 flex flex-col items-center justify-center p-4 z-20 text-center"
-                  >
-                    <motion.div
-                      animate={{ x: [-5, 5, -5] }}
-                      transition={{ repeat: Infinity, duration: 1.5 }}
-                      className="mb-2"
-                    >
-                      <ArrowLeft className="text-soviet-red w-8 h-8" />
-                    </motion.div>
-                    <span className="text-soviet-red font-bold text-sm leading-tight">
-                      Kết quả đã trở thành nguyên nhân mới.
-                    </span>
-                  </motion.div>
-                )}
-              </motion.button>
-            ))}
+              return (
+                <motion.div
+                  key={item.id}
+                  layout
+                  draggable
+                  onDragStart={() => setDraggingIndex(index)}
+                  onDragOver={(event) => event.preventDefault()}
+                  onDrop={() => handleDropAt(index)}
+                  whileHover={{ scale: 1.01 }}
+                  className={`p-6 rounded-2xl border-2 bg-white transition-all shadow-sm ${
+                    isCorrect
+                      ? 'border-green-500/70 shadow-green-100'
+                      : isCurrentTarget
+                      ? 'border-soviet-red/50 hover:border-soviet-red hover:shadow-md cursor-move'
+                      : 'border-zinc-100 hover:border-zinc-300 hover:shadow-md cursor-move'
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-start gap-4">
+                      <span className="w-9 h-9 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center font-black text-sm mt-1">
+                        {index + 1}
+                      </span>
+                      <div>
+                        <div className="text-xs uppercase tracking-widest text-zinc-400 font-bold mb-2">Ô {item.id}</div>
+                        <p className="text-zinc-800 font-semibold leading-relaxed">{item.sentence}</p>
+                      </div>
+                    </div>
+
+                    {isCorrect && <CircleCheck className="w-6 h-6 text-green-500 mt-1 shrink-0" />}
+                  </div>
+
+                  <AnimatePresence>
+                    {isCorrect && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        className="mt-4 p-4 rounded-xl bg-green-50 border border-green-200"
+                      >
+                        <p className="text-sm font-bold uppercase tracking-wider text-green-700 mb-1">Diễn giải thực tế</p>
+                        <p className="text-green-800 leading-relaxed">{item.explanation}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <div className="mt-6 text-center">
+            <p className="text-sm text-zinc-500 font-medium">
+              {success
+                ? 'Bạn đã hoàn thành toàn bộ theo đúng thứ tự.'
+                : `Đang chấm tuần tự: cần đúng đến ô ${correctPrefixLength + 1}.`}
+            </p>
+          </div>
+
+          <div className="mt-8 flex justify-center">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="px-6 py-3 rounded-full border-2 border-zinc-200 text-zinc-700 font-bold hover:border-soviet-red hover:text-soviet-red transition-colors"
+            >
+              Trộn Lại Các Ô
+            </button>
           </div>
         </div>
 
@@ -172,12 +247,12 @@ const InteractiveGame = () => {
               className="mt-16 p-12 bg-white border-4 border-soviet-gold rounded-[3rem] shadow-[0_30px_60px_-15px_rgba(245,158,11,0.3)] relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-soviet-red via-soviet-gold to-soviet-red" />
-              <h4 className="text-4xl font-black text-zinc-900 mb-6 uppercase tracking-tighter">Hợp Thể Biện Chứng Hoàn Tất</h4>
+              <h4 className="text-4xl font-black text-zinc-900 mb-6 uppercase tracking-tighter">Bạn Đã Sắp Xếp Đúng Toàn Bộ</h4>
               <p className="text-soviet-red text-2xl italic font-serif leading-tight">
-                "Kết quả tác động ngược trở lại nguyên nhân, tạo nên một mạng lưới các mối liên hệ không bao giờ dứt."
+                "Từ gánh nặng sinh tồn đến cánh chim tự do - bạn đã sắp xếp đúng hành trình của một đời người."
               </p>
-              <div className="mt-8 text-zinc-400 font-black uppercase tracking-[0.4em] text-xs">
-                — Friedrich Engels
+              <div className="mt-8 text-zinc-400 font-black uppercase tracking-[0.2em] text-xs">
+                Hoàn tất thử thách tự do
               </div>
             </motion.div>
           )}
