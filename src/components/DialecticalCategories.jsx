@@ -6,7 +6,7 @@ const categories = [
   {
     title: "Quan điểm duy vật siêu hình (Thuyết định mệnh)",
     desc: "",
-    images: ["/image/Ảnh chụp màn hình 2026-04-15 155003.png"],
+    images: ["/image/Gemini_Generated_Image_dszxwxdszxwxdszx.png"],
     definition: [
       "Mọi sự vật, hiện tượng, kể cả hành vi của con người, đều chịu sự chi phối tất yếu nghiêm ngặt của các quy luật tự nhiên (nguyên lý nhân quả cứng nhắc).",
       "Con người tưởng mình tự do chỉ vì không biết đến những nguyên nhân đã quyết định hành vi của mình.",
@@ -26,7 +26,7 @@ const categories = [
   {
     title: "Quan điểm duy tâm khách quan (Hegel)",
     desc: "",
-    images: ["/image/OIP.jfif"],
+    images: ["/image/Gemini_Generated_Image_6c7w4q6c7w4q6c7w.png"],
     definition: [
       "Tất yếu là sự vận động của Tinh thần tuyệt đối (ý niệm) trong lịch sử.",
       "Tự do không phải là làm theo ý muốn chủ quan, mà là nhận thức và hành động theo tinh thần tất yếu của lịch sử.",
@@ -44,7 +44,7 @@ const categories = [
   {
     title: "Quan điểm duy tâm chủ quan (Hiện sinh)",
     desc: "",
-    images: ["/image/OIP (1).jfif"],
+    images: ["/image/Gemini_Generated_Image_g6v6oog6v6oog6v6.png"],
     definition: [
        "Con người bị kết án là phải tự do (Sartre).",
        "Con người sinh ra không có bản chất định sẵn, tự do là tuyệt đối, không bị ràng buộc bởi bất kỳ tất yếu khách quan nào (kể cả Chúa, quy luật tự nhiên hay xã hội).",
@@ -63,7 +63,7 @@ const categories = [
   {
     title: "Quan điểm thần học (Kitô giáo, Hồi giáo, Phật giáo có yếu tố thần học)",
     desc: "",
-    images: ["/image/OIP (2).jfif"],
+    images: ["/image/Gemini_Generated_Image_n99ze8n99ze8n99z.png"],
     definition: [
        "Tất yếu là ý Chúa (thiên mệnh, định mệnh thiêng liêng).",
        "Tự do là sự lựa chọn của con người trong khuôn khổ do Chúa cho phép.",

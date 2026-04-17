@@ -11,7 +11,7 @@ const PresentationOverview = () => {
   ];
 
   const outline = [
-    { title: "Nguyên lý về mối liên hệ phổ biến", desc: "Nền tảng lý luận về sự liên kết giữa sự tự do và sự tất yếu." },
+    { title: "Mối Liên Hệ Giữa Tự Do và Tất Yếu", desc: "Nền tảng lý luận về sự liên kết giữa sự tự do và sự tất yếu." },
     { title: "Quan điểm qua các trường phái về sự tự do và sự tất yếu", desc: "Duy tâm – duy vật – thần học nhìn tự do & tất yếu thế nào?" },
     { title: "Quan điểm của Triết học Mác - Lênin", desc: "Phần quan trọng nhất – Tự do = nhận thức tất yếu" },
     { title: "Liên hệ thực tiễn & Ý nghĩa", desc: "Hành động thế nào để vừa tự do vừa đúng quy luật?" },
