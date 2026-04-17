@@ -5,12 +5,12 @@ import { CircleCheck, CircleAlert } from 'lucide-react';
 const orderedChallengeItems = [
   {
     id: 'E',
-    sentence: 'Phải kiếm tiền để sống (tất yếu đầu tiên: nhu cầu sinh tồn).',
+    sentence: 'Phải kiếm tiền để sống (nhu cầu sinh tồn).',
     explanation: 'Trước hết, ai cũng phải kiếm tiền để sống - đó là tất yếu đầu tiên.',
   },
   {
     id: 'F',
-    sentence: 'Phải học một nghề/có chuyên môn (tất yếu thứ hai: nếu không thì chỉ làm việc chân tay bấp bênh).',
+    sentence: 'Phải học một nghề/có chuyên môn (nếu không thì chỉ làm việc chân tay bấp bênh).',
     explanation: 'Muốn kiếm tiền ổn định thì phải có nghề/chuyên môn - tất yếu thứ hai.',
   },
   {
