@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import PresentationOverview from './components/PresentationOverview'
@@ -48,7 +48,8 @@ function App() {
         <Navbar />
         
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<Navigate to="/overview" replace />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/overview" element={<PresentationOverview />} />
           <Route path="/video" element={<VideoSection />} />
           <Route path="/game" element={<CardGame />} />
