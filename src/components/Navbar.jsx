@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Tổng quan", path: "/overview" },
-    { name: "Lý thuyết", id: "theory", path: "/#theory" },
+    { name: "Lý thuyết", id: "theory", path: "/home#theory" },
     { name: "Video", path: "/video" },
     { name: "Sơ đồ", path: "/mindmap-detail" },
     { name: "Trò chơi", path: "/game" },

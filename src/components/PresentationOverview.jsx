@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Users, ListOrdered, BookOpen, Cpu, MessageSquare, Book } from 'lucide-react';
+import { Users, ListOrdered, BookOpen, Cpu, MessageSquare, Book, GitBranch, Sparkles } from 'lucide-react';
 
 const PresentationOverview = () => {
   const members = [
@@ -20,7 +20,8 @@ const PresentationOverview = () => {
   const tools = [
     { name: "NotebookLM", icon: <Book className="w-6 h-6" />, color: "bg-blue-500", desc: "Tổng hợp Nội Dung và Làm Video Tổng Hợp" },
     { name: "ChatGPT", icon: <MessageSquare className="w-6 h-6" />, color: "bg-emerald-500", desc: "Tạo Promt để VibeCoding Web" },
-    { name: "MyMap AI", icon: <Cpu className="w-6 h-6" />, color: "bg-orange-500", desc: "Dùng để tạo MindMap từ nội dung đã tổng hợp" },
+    { name: "GitMind", icon: <GitBranch className="w-6 h-6" />, color: "bg-orange-500", desc: "Dùng để tạo MindMap từ nội dung đã tổng hợp" },
+    { name: "Gemini", icon: <Sparkles className="w-6 h-6" />, color: "bg-indigo-500", desc: "Dùng để tạo ảnh minh họa cho nội dung" },
   ];
 
   return (
@@ -113,7 +114,7 @@ const PresentationOverview = () => {
             Phụ lục: Công cụ hỗ trợ
           </h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {tools.map((tool) => (
               <div key={tool.name} className="flex flex-col items-center group text-center">
                 <div className={`w-16 h-16 rounded-2xl ${tool.color} text-white flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
