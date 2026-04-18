@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import FallingFlowers from './components/FallingFlowers'
 import VideoSection from './components/VideoSection'
 import CardGame from './components/CardGame'
+import MindmapPage from './components/MindmapPage'
 
 const HomePage = () => (
   <>
@@ -51,6 +52,7 @@ function App() {
           <Route path="/overview" element={<PresentationOverview />} />
           <Route path="/video" element={<VideoSection />} />
           <Route path="/game" element={<CardGame />} />
+          <Route path="/mindmap-detail" element={<MindmapPage />} />
         </Routes>
         
         <Footer />
