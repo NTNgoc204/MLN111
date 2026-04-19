@@ -46,7 +46,7 @@ const categories = [
     desc: "",
     images: ["/image/Gemini_Generated_Image_g6v6oog6v6oog6v6.png"],
     definition: [
-       "Con người bị kết án là phải tự do (Sartre).",
+       "Con người bị kết án phải tự do (Sartre).",
        "Con người sinh ra không có bản chất định sẵn, tự do là tuyệt đối, không bị ràng buộc bởi bất kỳ tất yếu khách quan nào (kể cả Chúa, quy luật tự nhiên hay xã hội).",
        "Tất yếu nếu có chỉ do chính con người tự đặt ra và có thể thay đổi bất cứ lúc nào",
        "Hành vi của con người là hoàn toàn tự do, do đó phải chịu trách nhiệm tuyệt đối."
