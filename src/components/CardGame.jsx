@@ -166,7 +166,7 @@ const CardGame = () => {
   const [playerHand, setPlayerHand] = useState([]);
   const [dealerHand, setDealerHand] = useState([]);
   const [gameState, setGameState] = useState('betting'); 
-  const [message, setMessage] = useState('Chào mừng đến với Xì Dách Biện Chứng!');
+  const [message, setMessage] = useState('Chào mừng đến với nhà cái của nhóm 3!');
   const [playerScore, setPlayerScore] = useState(0);
   const [dealerScore, setDealerScore] = useState(0);
   const [resultType, setResultType] = useState('neutral');
@@ -395,7 +395,7 @@ const CardGame = () => {
       setRoundResult(openingResult.winner, openingResult.message);
     } else {
       setGameState('playing');
-      setMessage('Muốn rút bài? Hãy trả lời đúng câu hỏi biện chứng!');
+      setMessage('Muốn rút bài? Hãy trả lời đúng câu hỏi!');
     }
     setQuizFeedback(null);
   };
@@ -606,7 +606,7 @@ const CardGame = () => {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-6xl font-black text-soviet-red mb-4 uppercase tracking-tighter italic">
-            Xì Dách <span className="text-white">Biện Chứng</span>
+            Xì Dách <span className="text-white">Tự do & tất yếu</span>
           </h2>
           <div className="h-1.5 w-20 bg-soviet-gold mx-auto mb-6 rounded-full" />
           <p className="text-zinc-400 font-bold uppercase tracking-widest text-sm px-4">{message}</p>
